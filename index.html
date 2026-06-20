@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu — 15 Anos Bárbara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            padding: 2rem 1rem;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: linear-gradient(175deg, #fff5f7 0%, #fdeef2 100%);
+            border-radius: 32px;
+            padding: 2.4rem 1.8rem 2.2rem;
+            box-shadow: 0 12px 40px rgba(180, 80, 110, 0.13);
+            border: 1px solid rgba(240, 185, 200, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ── Ícone circular "15" ── */
+        .badge-15 {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid #d4869e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: transparent;
+        }
+
+        .badge-15 span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #c0607c;
+            letter-spacing: -0.03em;
+        }
+
+        /* ── Header ── */
+        .header-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: #b05570;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 0.1rem;
+        }
+
+        .header-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: #c98fa0;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Cronômetro do Bar ── */
+        #bar-timer {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .timer-waiting { background: #fce8ef; color: #b05570; border: 1px solid #e8b4c4; }
+        .timer-open { background: #e6f4ea; color: #1e8e3e; border: 1px solid #ceead6; }
+        .timer-closed { background: #fce8e6; color: #d93025; border: 1px solid #fad2cf; }
+
+        /* ── Botões Padrão ── */
+        .btn-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 1.4rem;
+            border-radius: 18px;
+            border: 1.5px solid #e8b4c4;
+            background: #fff;
+            color: #b05570;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            box-shadow: 0 2px 8px rgba(200, 120, 150, 0.07);
+        }
+
+        .btn-menu:hover {
+            background: #fce8ef;
+            border-color: #d48099;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(200, 100, 130, 0.15);
+        }
+
+        .btn-menu:active { transform: translateY(0); }
+        .btn-menu .icon { font-size: 17px; flex-shrink: 0; }
+        .btn-menu .label { flex: 1; text-align: left; padding-left: 0.9rem; }
+
+        /* ── Botão Interativo (Drinks) DESTAQUE ── */
+        .btn-interactive {
+            background: linear-gradient(135deg, #d4869e 0%, #b05570 100%);
+            color: #fff !important;
+            border: none;
+            box-shadow: 0 6px 20px rgba(176, 85, 112, 0.4);
+            padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+        }
+
+        .btn-interactive:hover {
+            background: linear-gradient(135deg, #c0607c 0%, #993556 100%);
+            box-shadow: 0 8px 25px rgba(176, 85, 112, 0.5);
+        }
+
+        .btn-interactive .label-wrap {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding-left: 0.9rem;
+            text-align: left;
+        }
+
+        .btn-interactive .title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+
+        .btn-interactive .subtitle {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: #fce8ef;
+            text-transform: uppercase;
+        }
+
+        /* ── Botão de Fotos ── */
+        .btn-fotos {
+            background: #fce8f0;
+            border-color: #e8afc2;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 1.1rem 1.4rem;
+            margin-top: 0.15rem;
+        }
+
+        .btn-fotos:hover { background: #f9d9e8; }
+        .btn-fotos .fotos-top { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .fotos-img-wrap { width: 36px; height: 36px; border-radius: 8px; background: #fce8f0; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+        .fotos-img-wrap img { width: 28px; height: 28px; object-fit: contain; mix-blend-mode: multiply; }
+        .btn-fotos .fotos-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: #b05570; text-align: center; }
+        .btn-fotos .fotos-sub { font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; color: #c8889c; text-transform: uppercase; text-align: center; }
+
+        /* ── Assinatura ── */
+        .developer-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #c8889c;
+            font-size: 11px;
+            margin-top: 1.2rem; /* AJUSTADO: Mais próximo do card */
+            opacity: 0.9;
+            transition: opacity 0.2s, color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .dev-logo {
+            height: 18px; /* Altura ajustada */
+            width: auto;
+            border-radius: 6px; /* AJUSTADO: Bordas arredondadas no logo */
+            display: block;
+            mix-blend-mode: multiply;
+        }
+        .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .developer-signature:hover .dev-name { border-color: #b05570; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="badge-15"><span>15</span></div>
+    <p class="header-name">15 anos da<br>Bárbara</p>
+    <p class="header-sub"></p>
+
+    <div id="bar-timer" class="timer-waiting">⏳ Carregando status do bar...</div>
+
+    <div class="btn-list">
+
+        <a href="drinks.html" id="btn-drinks" class="btn-menu btn-interactive">
+            <div class="label-wrap">
+                <span class="title">Bar de Drinks (Interativo)</span>
+                <span class="subtitle">► Clique para fazer seu pedido</span>
+            </div>
+            <span class="icon">🍹</span>
+        </a>
+
+        <a href="bar.html" class="btn-menu">
+            <span class="label">Bebidas Convencionais</span>
+            <span class="icon">🍻</span>
+        </a>
+
+        <a href="buffet.html" class="btn-menu">
+            <span class="label">Cardápio do Buffet</span>
+            <span class="icon">🍽️</span>
+        </a>
+
+        <a href="doces.html" class="btn-menu">
+            <span class="label">Seleção de Doces</span>
+            <span class="icon">🧁</span>
+        </a>
+
+        <a href="fila.html" class="btn-menu" style="background: #fffbfd; border-color: #e8b4c4;">
+            <span class="label" style="color: #c0607c;">Fila de Espera (Drinks)</span>
+            <span class="icon">⏳</span>
+        </a>
+
+        <a href="https://photos.app.goo.gl/jTva4GbmPCjdf9rAA" target="_blank" class="btn-menu btn-fotos">
+            <div class="fotos-top">
+                <div class="fotos-img-wrap"><img src="img/google_fotos.jpg" alt="Google Fotos"></div>
+                <div class="fotos-img-wrap"><img src="img/comartilhar.jpg" alt="Compartilhar"></div>
+            </div>
+            <span class="fotos-title">COMPARTILHE SUAS FOTOS DA FESTA</span>
+            <span class="fotos-sub">Álbum compartilhado no telão</span>
+        </a>
+
+    </div>
+
+</div>
+
+<a href="https://mateusrad.github.io/portfolio/" target="_blank" class="developer-signature">
+    <img src="img/logo_mateus.png" alt="Logo Mateus Rosa Developer" class="dev-logo" />
+    <span>Code & Design por <span class="dev-name">Mateus Rosa</span></span>
+</a>
+
+<script>
+    // Lógica do Cronômetro do Bar
+    function updateBarTimer() {
+        const now = new Date().getTime();
+
+        // CONFIGURAÇÃO: Altere aqui o dia e hora que o bar de drinks vai abrir
+        const openTime = new Date("2026-09-06T22:00:00").getTime();
+        // Duração do bar: 4 horas
+        const closeTime = openTime + (4 * 60 * 60 * 1000);
+
+        const timerEl = document.getElementById("bar-timer");
+        const btnDrinks = document.getElementById("btn-drinks");
+
+        if (now < openTime) {
+            const distance = openTime - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            let timeString = days > 0 ? `${days}d ` : '';
+            timeString += `${hours}h ${minutes}m ${seconds}s`;
+
+            timerEl.className = "timer-waiting";
+            timerEl.innerHTML = `⏳ O Bar de Drinks abre em: ${timeString}`;
+
+            // COMENTADO PARA FASE DE DESENVOLVIMENTO:
+            // btnDrinks.style.pointerEvents = "none";
+            // btnDrinks.style.opacity = "0.6";
+
+        } else if (now >= openTime && now < closeTime) {
+            const distance = closeTime - now;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timerEl.className = "timer-open";
+            timerEl.innerHTML = `🟢 BAR DE DRINKS ABERTO! Encerra em: ${hours}h ${minutes}m ${seconds}s`;
+
+            btnDrinks.style.pointerEvents = "auto";
+            btnDrinks.style.opacity = "1";
+
+        } else {
+            timerEl.className = "timer-closed";
+            timerEl.innerHTML = `🔴 O Bar de Drinks está encerrado.`;
+
+            // COMENTADO PARA FASE DE DESENVOLVIMENTO:
+            // btnDrinks.style.pointerEvents = "none";
+            // btnDrinks.style.opacity = "0.6";
+        }
+    }
+
+    setInterval(updateBarTimer, 1000);
+    updateBarTimer();
+</script>
+
+</body>
+</html>

@@ -4,90 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Barman — 15 Anos Bárbara</title>
-    <!-- Importação da fonte Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* ── BLOCO 1: RESET E CONFIGURAÇÃO GERAL ── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
-            background: #120509;
-            color: #fff;
-            padding: 1.5rem;
-        }
+        body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0f0407; color: #fff; padding: 1.5rem; }
         .container { width: 100%; max-width: 700px; margin: 0 auto; }
 
-        /* ── BLOCO 2: CABEÇALHO DO BARMAN ── */
         header { text-align: center; margin-bottom: 2rem; border-bottom: 2px solid #b05570; padding-bottom: 1rem; }
         header h1 { font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; color: #f7dde6; }
         header p { font-size: 11px; color: #c98fa0; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-        /* ── BLOCO 3: ESTRUTURA DAS DUAS COLUNAS ── */
         .painel-trabalho { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .col-barman {
-            background: #1e0b11;
-            border-radius: 20px;
-            padding: 1.2rem;
-            border: 1px solid rgba(240, 185, 200, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        .col-barman { background: #1a080e; border-radius: 20px; padding: 1.2rem; border: 1px solid rgba(240, 185, 200, 0.1); display: flex; flex-direction: column; gap: 1rem; }
 
-        .titulo-col { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(240, 185, 200, 0.2); }
+        .titulo-col { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(240, 185, 200, 0.2); }
         .tit-pendente { color: #ffb74d; }
         .tit-pronto { color: #81c784; }
 
-        /* ── BLOCO 4: DESIGN DOS CARTÕES DE PEDIDO ── */
-        .card-pedido {
-            background: linear-gradient(135deg, #2d121a 0%, #3d1c27 100%);
-            border: 1px solid rgba(240, 185, 200, 0.15);
-            border-radius: 14px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .card-pedido { background: linear-gradient(135deg, #260f16 0%, #361822 100%); border: 1px solid rgba(240, 185, 200, 0.2); border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
         .info-pedido { display: flex; flex-direction: column; gap: 0.25rem; }
         .nome-convidado { font-size: 15px; font-weight: 700; color: #fff; }
         .nome-drink { font-size: 12px; font-weight: 600; color: #f0b9c8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .horario { font-size: 9.5px; color: #8c606d; margin-top: 0.2rem; }
+        .horario { font-size: 9.5px; color: #a37a86; margin-top: 0.2rem; }
 
-        /* ── ETIQUETAS DE ALERTA DE ÁLCOOL ── */
-        .badge-alcool {
-            align-self: flex-start;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-size: 9.5px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-top: 0.1rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .badge-com { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
-        .badge-sem { background: #e6f6ec; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .badge-alcool { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.1rem; font-family: 'Montserrat', sans-serif; }
+        .badge-com { background: #ff4444; color: #fff; border: 1px solid #ffcccc; }
+        .badge-sem { background: #00c851; color: #fff; border: 1px solid #ccffcc; }
 
-        /* ── BLOCO 5: BOTÕES DE AÇÃO (PRONTO / ENTREGUE) ── */
-        .btn-acao { width: 100%; padding: 0.7rem; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; border: none; transition: background 0.2s; }
-        .btn-concluir { background: #b05570; color: white; }
-        .btn-concluir:hover { background: #96435c; }
-        .btn-entregar { background: #2e7d32; color: white; }
-        .btn-entregar:hover { background: #1b5e20; }
-        .sem-pedidos { text-align: center; color: #63434e; font-size: 12px; padding: 2rem 0; font-style: italic; }
+        .btn-acao { width: 100%; padding: 0.75rem; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s ease; }
+        .btn-concluir { background: #e8b4c4; color: #120509; box-shadow: 0 0 10px rgba(232, 180, 196, 0.4); }
+        .btn-concluir:hover { background: #f7dde6; box-shadow: 0 0 15px rgba(232, 180, 196, 0.6); }
+        .btn-entregar { background: #00c851; color: #fff; box-shadow: 0 0 10px rgba(0, 200, 81, 0.4); }
+        .btn-entregar:hover { background: #00e676; box-shadow: 0 0 15px rgba(0, 200, 81, 0.6); }
+
+        .sem-pedidos { text-align: center; color: #8c606d; font-size: 12px; padding: 2rem 0; font-style: italic; }
         @media (max-width: 600px) { .painel-trabalho { grid-template-columns: 1fr; } }
 
-        /* ── BLOCO 6: TOAST DE NOTIFICAÇÃO ── */
-        .toast {
-            position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: #1e0b11; border: 1.5px solid rgba(240, 185, 200, 0.3); border-radius: 14px;
-            padding: 0.9rem 1.3rem; box-shadow: 0 8px 28px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 0.7rem;
-            max-width: 320px; width: calc(100% - 2rem); z-index: 2000; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
+        .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e0b11; border: 1.5px solid rgba(240, 185, 200, 0.3); border-radius: 14px; padding: 0.9rem 1.3rem; box-shadow: 0 8px 28px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 0.7rem; max-width: 320px; width: calc(100% - 2rem); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
         .toast.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
         .toast-icon { font-size: 18px; flex-shrink: 0; }
         .toast-body { display: flex; flex-direction: column; gap: 0.1rem; }
@@ -134,23 +88,26 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Suas Chaves Oficiais do Banco de Dados
     const firebaseConfig = {
-        apiKey: "AIzaSyCX-HHIJIuB6B2XlN74HJf2zNBHLdTTC0I",
-        authDomain: "lista-15-anos-5e046.firebaseapp.com",
-        databaseURL: "https://lista-15-anos-5e046-default-rtdb.firebaseio.com",
-        projectId: "lista-15-anos-5e046",
-        storageBucket: "lista-15-anos-5e046.firebasestorage.app",
-        messagingSenderId: "219147274740",
-        appId: "1:219147274740:web:615135021aa9050b1891a1"
+        apiKey: "AIzaSyAsCh0k2Kx6jiS1R3mJtAvhMaIY00up-2E",
+        authDomain: "menu-interativo-faaec.firebaseapp.com",
+        databaseURL: "https://menu-interativo-faaec-default-rtdb.firebaseio.com",
+        projectId: "menu-interativo-faaec",
+        storageBucket: "menu-interativo-faaec.firebasestorage.app",
+        messagingSenderId: "1046837961375",
+        appId: "1:1046837961375:web:430ec81a42e46a0ccb38aa"
     };
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const pedidosRef = ref(database, 'pedidos');
 
-    // Lista de reconhecimento do sistema para classificar se tem álcool ou não
+    // NOVA LISTA CORRETA DE DRINKS COM ÁLCOOL (Identifica perfeitamente)
     const drinksComAlcool = [
+        'Drink da Aniversariante (Com Álcool)',
+        'Piña Colada (Com Álcool)',
+        'Lagoa Azul (Com Álcool)',
+        'Gin Morango e Pêssego',
         'Caipirinhas Variadas',
         'Gin Tônica com Especiarias',
         'Sex on the Beach'
@@ -183,8 +140,6 @@
                 horaFormatada = data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
             }
 
-            // ── VERIFICAÇÃO DE ÁLCOOL ──
-            // Confere se o drink do pedido está na lista de drinks alcoólicos e cria o botão visual
             let badgeHtml = "";
             if (drinksComAlcool.includes(pedido.drink)) {
                 badgeHtml = `<span class="badge-alcool badge-com">🔞 COM ÁLCOOL</span>`;
@@ -195,7 +150,6 @@
             const card = document.createElement('div');
             card.className = 'card-pedido';
 
-            // Cartão PENDENTE (Coluna Esquerda)
             if (pedido.status === "pendente") {
                 qtdPendentes++;
                 card.innerHTML = `
@@ -208,9 +162,7 @@
                     <button class="btn-acao btn-concluir" onclick="mudarStatus('${pedido.id}', 'pronto')">Pronto ➔</button>
                 `;
                 divPendentes.appendChild(card);
-            }
-            // Cartão PRONTO (Coluna Direita)
-            else if (pedido.status === "pronto") {
+            } else if (pedido.status === "pronto") {
                 qtdProntos++;
                 card.innerHTML = `
                     <div class="info-pedido">

@@ -12,6 +12,7 @@
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column; /* Necessário para a assinatura no rodapé */
             align-items: center;
             justify-content: center;
             background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
@@ -127,12 +128,39 @@
             border: 1.5px solid #e8b4c4;
             line-height: 1.4;
         }
+
+        /* ── Assinatura ── */
+        .developer-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #c8889c;
+            font-size: 11px;
+            margin-top: 1.2rem;
+            opacity: 0.9;
+            transition: opacity 0.2s, color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .dev-logo {
+            height: 18px;
+            width: auto;
+            border-radius: 6px;
+            display: block;
+            mix-blend-mode: multiply;
+        }
+        .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .developer-signature:hover .dev-name { border-color: #b05570; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <a href="menu.html" class="btn-voltar">⬅ Voltar</a>
+    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
 
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">Cardápio</p>
@@ -155,6 +183,11 @@
         <div class="menu-item">Paçoca de Pinhão</div>
     </div>
 </div>
+
+<a href="https://mateusrad.github.io/portfolio/" target="_blank" class="developer-signature">
+    <img src="img/logo_mateus.png" alt="Logo Mateus Rosa Developer" class="dev-logo" />
+    <span>Code & Design por <span class="dev-name">Mateus Rosa</span></span>
+</a>
 
 </body>
 </html>

@@ -12,6 +12,7 @@
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column; /* Necessário para a assinatura ficar no rodapé */
             align-items: center;
             justify-content: center;
             background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
@@ -374,12 +375,39 @@
 
         .toast.toast-erro { border-color: #f5c0c0; }
         .toast.toast-erro .toast-title { color: #c62828; }
+
+        /* ── Assinatura ── */
+        .developer-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #c8889c;
+            font-size: 11px;
+            margin-top: 1.2rem;
+            opacity: 0.9;
+            transition: opacity 0.2s, color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .dev-logo {
+            height: 18px;
+            width: auto;
+            border-radius: 6px;
+            display: block;
+            mix-blend-mode: multiply;
+        }
+        .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .developer-signature:hover .dev-name { border-color: #b05570; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <a href="menu.html" class="btn-voltar">⬅ Voltar</a>
+    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
 
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">Cocktails</p>
@@ -432,6 +460,11 @@
     </div>
 </div>
 
+<a href="https://mateusrad.github.io/portfolio/" target="_blank" class="developer-signature">
+    <img src="img/logo_mateus.png" alt="Logo Mateus Rosa Developer" class="dev-logo" />
+    <span>Code & Design por <span class="dev-name">Mateus Rosa</span></span>
+</a>
+
 <div class="toast" id="toastNotif">
     <span class="toast-icon" id="toastIcone">✅</span>
     <div class="toast-body">
@@ -470,14 +503,15 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+    // CHAVES ATUALIZADAS PARA O PROJETO MENU INTERATIVO
     const firebaseConfig = {
-        apiKey: "AIzaSyCX-HHIJIuB6B2XlN74HJf2zNBHLdTTC0I",
-        authDomain: "lista-15-anos-5e046.firebaseapp.com",
-        databaseURL: "https://lista-15-anos-5e046-default-rtdb.firebaseio.com",
-        projectId: "lista-15-anos-5e046",
-        storageBucket: "lista-15-anos-5e046.firebasestorage.app",
-        messagingSenderId: "219147274740",
-        appId: "1:219147274740:web:615135021aa9050b1891a1"
+        apiKey: "AIzaSyAsCh0k2Kx6jiS1R3mJtAvhMaIY00up-2E",
+        authDomain: "menu-interativo-faaec.firebaseapp.com",
+        databaseURL: "https://menu-interativo-faaec-default-rtdb.firebaseio.com",
+        projectId: "menu-interativo-faaec",
+        storageBucket: "menu-interativo-faaec.firebasestorage.app",
+        messagingSenderId: "1046837961375",
+        appId: "1:1046837961375:web:430ec81a42e46a0ccb38aa"
     };
 
     let database = null;
@@ -513,15 +547,15 @@
             ingredientes: "Curaçau blue, suco de limão, Sprite e vodka.",
             alcool: true
         },
-        "Gin Morango e Pêssego": {
+        "Gin Morango e Pêssego (Com Álcool)": {
             ingredientes: "Energético sabor morango e pêssego, gin e especiarias.",
             alcool: true
         },
-        "Soda Italiana Maçã Verde": {
+        "Soda Italiana Maçã Verde (Sem Álcool)": {
             ingredientes: "Xarope de maçã verde, suco de limão e água com gás.",
             alcool: false
         },
-        "Soda Italiana Frutas Vermelhas": {
+        "Soda Italiana Frutas Vermelhas (Sem Álcool)": {
             ingredientes: "Xarope de frutas vermelhas, suco de limão e água com gás.",
             alcool: false
         }
