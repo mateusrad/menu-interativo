@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks — 15 Anos Bárbara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: linear-gradient(175deg, #fff5f7 0%, #fdeef2 100%);
+            border-radius: 32px;
+            padding: 2rem 1.8rem 2.2rem;
+            box-shadow: 0 12px 40px rgba(180, 80, 110, 0.13);
+            border: 1px solid rgba(240, 185, 200, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-voltar {
+            align-self: flex-start;
+            font-size: 11px;
+            font-weight: 700;
+            color: #c0607c;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.2s ease;
+        }
+
+        .btn-voltar:hover { color: #b05570; }
+
+        .badge-15 {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid #d4869e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .badge-15 span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #c0607c;
+            letter-spacing: -0.03em;
+        }
+
+        .header-name {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: #b05570;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 0.1rem;
+        }
+
+        .header-sub {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: #c98fa0;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn-ver-fila {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            background: #fffbfd;
+            border: 1.5px dashed #e8b4c4;
+            color: #c0607c;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(200, 120, 150, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .btn-ver-fila:hover {
+            background: #fce8ef;
+            border-style: solid;
+            border-color: #d48099;
+            color: #b05570;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #b05570;
+            margin: 1.4rem 0 0.6rem;
+            align-self: flex-start;
+            border-bottom: 1px solid #e8b4c4;
+            width: 100%;
+            padding-bottom: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .title-alcool {
+            color: #9c405a;
+            border-color: #d4869e;
+        }
+
+        .item-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .menu-item-btn {
+            width: 100%;
+            padding: 1.1rem 1.3rem;
+            border-radius: 18px;
+            background: #fff;
+            color: #b05570;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(200, 120, 150, 0.06);
+            border: 1.5px solid #e8b4c4;
+            line-height: 1.3;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: all 0.22s ease;
+        }
+
+        .menu-item-btn:hover {
+            background: #fce8ef;
+            border-color: #d48099;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(200, 100, 130, 0.12);
+        }
+
+        .badge-tag {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.4rem;
+            border-radius: 6px;
+            align-self: flex-start;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .tag-sem { background: #e6f6ec; color: #2e7d32; }
+        .tag-com { background: #ffebee; color: #c62828; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(140, 60, 85, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 340px;
+            background: #fff;
+            border-radius: 24px;
+            padding: 1.6rem 1.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(240, 185, 200, 0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 600;
+            color: #b05570;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .selected-drink-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #b05570;
+            background: #fce8ef;
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            text-align: center;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            border: 1px solid #e8b4c4;
+        }
+
+        .ingredients-box {
+            background: #fffdfd;
+            border: 1px dashed #e8b4c4;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .ingredients-box strong {
+            font-style: normal;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #b05570;
+            display: block;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .input-group label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #c98fa0;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding-left: 0.3rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.85rem 1.1rem;
+            border-radius: 14px;
+            border: 1.5px solid #f0b9c8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: #555;
+            outline: none;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            border-color: #b05570;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.2rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.85rem;
+            border-radius: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-cancelar { background: #f5f5f5; color: #888; }
+        .btn-cancelar:hover { background: #e0e0e0; }
+
+        .btn-confirmar { background: #b05570; color: #fff; box-shadow: 0 4px 12px rgba(176, 85, 112, 0.2); transition: background 0.2s, opacity 0.2s; }
+        .btn-confirmar:hover:not(:disabled) { background: #96435c; }
+        .btn-confirmar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #fff;
+            border: 1.5px solid #e8b4c4;
+            border-radius: 16px;
+            padding: 1rem 1.4rem;
+            box-shadow: 0 8px 28px rgba(180, 80, 110, 0.18);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            max-width: 320px;
+            width: calc(100% - 2rem);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+
+        .toast-body { display: flex; flex-direction: column; gap: 0.2rem; }
+
+        .toast-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #b05570;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .toast-msg {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .toast.toast-erro { border-color: #f5c0c0; }
+        .toast.toast-erro .toast-title { color: #c62828; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <a href="menu.html" class="btn-voltar">⬅ Voltar</a>
+
+    <div class="badge-15"><span>15</span></div>
+    <p class="header-name">Cocktails</p>
+    <p class="header-sub">Toque para pedir</p>
+
+    <a href="fila.html" class="btn-ver-fila">Acompanhar Fila de Espera ⏳</a>
+
+    <h3 class="section-title">Drinks Sem Álcool (Teens)</h3>
+    <div class="item-list">
+        <button class="menu-item-btn" onclick="abrirPedido('Drink da Aniversariante (Sem Álcool)')">
+            <span>Drink da Aniversariante</span>
+            <span class="badge-tag tag-sem">🟢 Sem Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Piña Colada (Sem Álcool)')">
+            <span>Piña Colada</span>
+            <span class="badge-tag tag-sem">🟢 Sem Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Lagoa Azul (Sem Álcool)')">
+            <span>Lagoa Azul</span>
+            <span class="badge-tag tag-sem">🟢 Sem Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Soda Italiana Maçã Verde')">
+            <span>Soda Italiana Maçã Verde</span>
+            <span class="badge-tag tag-sem">🟢 Sem Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Soda Italiana Frutas Vermelhas')">
+            <span>Soda Italiana Frutas Vermelhas</span>
+            <span class="badge-tag tag-sem">🟢 Sem Álcool</span>
+        </button>
+    </div>
+
+    <h3 class="section-title title-alcool">Drinks Com Álcool (Adultos)</h3>
+    <div class="item-list">
+        <button class="menu-item-btn" onclick="abrirPedido('Drink da Aniversariante (Com Álcool)')">
+            <span>Drink da Aniversariante</span>
+            <span class="badge-tag tag-com">🔴 Contém Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Piña Colada (Com Álcool)')">
+            <span>Piña Colada</span>
+            <span class="badge-tag tag-com">🔴 Contém Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Lagoa Azul (Com Álcool)')">
+            <span>Lagoa Azul</span>
+            <span class="badge-tag tag-com">🔴 Contém Álcool</span>
+        </button>
+        <button class="menu-item-btn" onclick="abrirPedido('Gin Morango e Pêssego')">
+            <span>Gin Morango e Pêssego</span>
+            <span class="badge-tag tag-com">🔴 Contém Álcool</span>
+        </button>
+    </div>
+</div>
+
+<div class="toast" id="toastNotif">
+    <span class="toast-icon" id="toastIcone">✅</span>
+    <div class="toast-body">
+        <span class="toast-title" id="toastTitulo">Pedido Enviado!</span>
+        <span class="toast-msg" id="toastMensagem"></span>
+    </div>
+</div>
+
+<div class="modal-overlay" id="pedidoModal">
+    <div class="modal-content">
+        <h4 class="modal-title">Confirmar Pedido</h4>
+
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; width: 100%;">
+            <div class="selected-drink-tag" id="nomeDrinkSelecionado">NOME DO DRINK</div>
+            <div id="modalAlcoolBadge" class="badge-tag" style="align-self: center; font-size: 10px; padding: 0.3rem 0.8rem;">TIPO</div>
+        </div>
+
+        <div class="ingredients-box" id="ingredientesDrink">
+            <strong>Ingredientes:</strong>
+            <span id="textoIngredientes">Carregando composição...</span>
+        </div>
+
+        <div class="input-group">
+            <label for="nomeConvidado">Seu Primeiro Nome</label>
+            <input type="text" id="nomeConvidado" placeholder="Ex: Ricardo" required>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-action btn-cancelar" onclick="fecharPedido()">Cancelar</button>
+            <button class="btn-action btn-confirmar" id="btnConfirmar" onclick="enviarPedidoFirebase()">Pedir Drink</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCX-HHIJIuB6B2XlN74HJf2zNBHLdTTC0I",
+        authDomain: "lista-15-anos-5e046.firebaseapp.com",
+        databaseURL: "https://lista-15-anos-5e046-default-rtdb.firebaseio.com",
+        projectId: "lista-15-anos-5e046",
+        storageBucket: "lista-15-anos-5e046.firebasestorage.app",
+        messagingSenderId: "219147274740",
+        appId: "1:219147274740:web:615135021aa9050b1891a1"
+    };
+
+    let database = null;
+    try {
+        const app = initializeApp(firebaseConfig);
+        database = getDatabase(app);
+    } catch (e) {
+        console.log("Erro ao iniciar Firebase:", e);
+    }
+
+    const infoDrinks = {
+        "Drink da Aniversariante (Sem Álcool)": {
+            ingredientes: "Suco de morango, xarope de morango e leite condensado.",
+            alcool: false
+        },
+        "Drink da Aniversariante (Com Álcool)": {
+            ingredientes: "Suco de morango, xarope de morango, leite condensado e vodka.",
+            alcool: true
+        },
+        "Piña Colada (Sem Álcool)": {
+            ingredientes: "Suco de abacaxi, leite condensado e leite de coco.",
+            alcool: false
+        },
+        "Piña Colada (Com Álcool)": {
+            ingredientes: "Suco de abacaxi, leite condensado, leite de coco e Rum.",
+            alcool: true
+        },
+        "Lagoa Azul (Sem Álcool)": {
+            ingredientes: "Curaçau blue (xarope sem álcool), suco de limão e Sprite.",
+            alcool: false
+        },
+        "Lagoa Azul (Com Álcool)": {
+            ingredientes: "Curaçau blue, suco de limão, Sprite e vodka.",
+            alcool: true
+        },
+        "Gin Morango e Pêssego": {
+            ingredientes: "Energético sabor morango e pêssego, gin e especiarias.",
+            alcool: true
+        },
+        "Soda Italiana Maçã Verde": {
+            ingredientes: "Xarope de maçã verde, suco de limão e água com gás.",
+            alcool: false
+        },
+        "Soda Italiana Frutas Vermelhas": {
+            ingredientes: "Xarope de frutas vermelhas, suco de limão e água com gás.",
+            alcool: false
+        }
+    };
+
+    let drinkAtual = "";
+    let enviando = false;
+
+    let toastTimer = null;
+    window.mostrarToast = function(titulo, mensagem, erro = false) {
+        const toast = document.getElementById('toastNotif');
+        document.getElementById('toastTitulo').innerText = titulo;
+        document.getElementById('toastMensagem').innerText = mensagem;
+        document.getElementById('toastIcone').innerText = erro ? '❌' : '✅';
+        toast.className = 'toast' + (erro ? ' toast-erro' : '');
+
+        void toast.offsetWidth;
+        toast.classList.add('show');
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 4000);
+    };
+
+    window.abrirPedido = function(nomeDrink) {
+        drinkAtual = nomeDrink;
+        document.getElementById('nomeDrinkSelecionado').innerText = nomeDrink.toUpperCase();
+
+        const drinkInfo = infoDrinks[nomeDrink];
+        if (drinkInfo) {
+            document.getElementById('textoIngredientes').innerText = drinkInfo.ingredientes;
+            const badgeAlcool = document.getElementById('modalAlcoolBadge');
+            if (drinkInfo.alcool) {
+                badgeAlcool.innerText = "🔴 DRINK COM ÁLCOOL";
+                badgeAlcool.className = "badge-tag tag-com";
+            } else {
+                badgeAlcool.innerText = "🟢 DRINK SEM ÁLCOOL";
+                badgeAlcool.className = "badge-tag tag-sem";
+            }
+        } else {
+            document.getElementById('textoIngredientes').innerText = "Ingredientes selecionados pelo Bartender.";
+            document.getElementById('modalAlcoolBadge').innerText = "";
+        }
+
+        document.getElementById('pedidoModal').classList.add('active');
+        document.getElementById('nomeConvidado').focus();
+    };
+
+    window.fecharPedido = function() {
+        document.getElementById('pedidoModal').classList.remove('active');
+        document.getElementById('nomeConvidado').value = "";
+        drinkAtual = "";
+        enviando = false;
+        const btn = document.getElementById('btnConfirmar');
+        btn.disabled = false;
+        btn.innerText = "Pedir Drink";
+    };
+
+    window.enviarPedidoFirebase = function() {
+        if (enviando) return;
+
+        let nomeInput = document.getElementById('nomeConvidado').value.trim();
+
+        if (!nomeInput) {
+            mostrarToast("Nome obrigatório", "Digite seu primeiro nome para sabermos quem vai retirar o drink.", true);
+            document.getElementById('nomeConvidado').focus();
+            return;
+        }
+
+        nomeInput = nomeInput.charAt(0).toUpperCase() + nomeInput.slice(1).toLowerCase();
+
+        enviando = true;
+        const btn = document.getElementById('btnConfirmar');
+        btn.disabled = true;
+        btn.innerText = "Enviando...";
+
+        if (!database) {
+            mostrarToast("Erro de Conexão", "Banco de dados não conectado.", true);
+            window.fecharPedido();
+            return;
+        }
+
+        const dadosPedido = {
+            drink: drinkAtual,
+            convidado: nomeInput,
+            status: "pendente",
+            dataHora: serverTimestamp()
+        };
+
+        const pedidosRef = ref(database, 'pedidos');
+
+        push(pedidosRef, dadosPedido)
+            .then(() => {
+                window.fecharPedido();
+                mostrarToast("Pedido Enviado! 🍹", `${nomeInput}, seu ${drinkAtual} está na fila. Fique de olho no painel do balcão!`);
+            })
+            .catch((error) => {
+                console.error("Erro no Firebase:", error);
+                enviando = false;
+                btn.disabled = false;
+                btn.innerText = "Pedir Drink";
+                mostrarToast("Erro no Envio", "Não foi possível registrar o pedido. Tente novamente.", true);
+            });
+    };
+</script>
+
+</body>
+</html>

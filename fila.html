@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila do Bar — 15 Anos Bárbara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden; /* Evita qualquer rolagem na tela da TV */
+        }
+
+        .top-navigation {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            margin-bottom: 0.2rem;
+        }
+
+        .btn-voltar {
+            font-size: 11px;
+            font-weight: 700;
+            color: #c0607c;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .logo-header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1.2rem;
+        }
+
+        .logo-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #b05570;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .logo-header p {
+            font-size: 10px;
+            font-weight: 700;
+            color: #c98fa0;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.1rem;
+        }
+
+        .painel-fila {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .coluna {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(240, 185, 200, 0.4);
+            padding: 1.2rem;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(180, 80, 110, 0.04);
+        }
+
+        .coluna-pronto {
+            background: linear-gradient(175deg, #fff2f5 0%, #fdeef2 100%);
+            border: 2px solid #e8b4c4;
+            box-shadow: 0 10px 25px rgba(180, 80, 110, 0.08);
+        }
+
+        .coluna-titulo {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1.5px solid rgba(180, 80, 110, 0.12);
+        }
+
+        .titulo-preparando { color: #8c606d; }
+        .titulo-pronto { color: #b05570; }
+
+        .lista-nomes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .item-fila {
+            background: #fff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(232, 180, 196, 0.2);
+        }
+
+        .item-fila .nome {
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .item-fila .drink {
+            font-size: 10px;
+            font-weight: 600;
+            color: #c98fa0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #faf2f4;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .coluna-pronto .item-fila {
+            border-color: #e8b4c4;
+            animation: pulse-brilho 2s infinite alternate;
+        }
+
+        .coluna-pronto .item-fila .nome { color: #b05570; font-size: 15px; }
+        .coluna-pronto .item-fila .drink { background: #fce8ef; color: #b05570; }
+
+        @keyframes pulse-brilho {
+            0% { box-shadow: 0 2px 6px rgba(180, 80, 110, 0.02); }
+            100% { box-shadow: 0 4px 12px rgba(180, 80, 110, 0.12); border-color: #d4869e; }
+        }
+
+        .live-bar {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #c98fa0;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #81c784;
+            flex-shrink: 0;
+            animation: piscar 1.8s ease-in-out infinite;
+        }
+
+        @keyframes piscar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-navigation">
+    <a href="drinks.html" class="btn-voltar">⬅ Voltar</a>
+</div>
+
+<div class="logo-header">
+    <h1>Painel do Bar</h1>
+    <p>Acompanhe e retire seu copo</p>
+</div>
+
+<div class="live-bar">
+    <span class="live-dot"></span>
+    <span>Ao vivo · Atualizado às <span id="horaUpdate">--:--</span></span>
+</div>
+
+<div class="painel-fila">
+    <div class="coluna coluna-pronto">
+        <h2 class="coluna-titulo titulo-pronto">✨ Prontos para Retirada (Retirar no Balcão)</h2>
+        <div class="lista-nomes" id="listaPronto">
+        </div>
+    </div>
+
+    <div class="coluna">
+        <h2 class="coluna-titulo titulo-preparando">⏳ Preparando os Próximos Drinks</h2>
+        <div class="lista-nomes" id="listaPreparando">
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCX-HHIJIuB6B2XlN74HJf2zNBHLdTTC0I",
+        authDomain: "lista-15-anos-5e046.firebaseapp.com",
+        databaseURL: "https://lista-15-anos-5e046-default-rtdb.firebaseio.com",
+        projectId: "lista-15-anos-5e046",
+        storageBucket: "lista-15-anos-5e046.firebasestorage.app",
+        messagingSenderId: "219147274740",
+        appId: "1:219147274740:web:615135021aa9050b1891a1"
+    };
+
+    let database = null;
+    try {
+        const app = initializeApp(firebaseConfig);
+        database = getDatabase(app);
+    } catch (e) {
+        console.log("Erro ao iniciar Firebase:", e);
+    }
+
+    if (database) {
+        const pedidosRef = ref(database, 'pedidos');
+
+        onValue(pedidosRef, (snapshot) => {
+            const agora = new Date();
+            document.getElementById('horaUpdate').innerText =
+                agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            const divPreparando = document.getElementById('listaPreparando');
+            const divPronto = document.getElementById('listaPronto');
+
+            divPreparando.innerHTML = "";
+            divPronto.innerHTML = "";
+
+            if (!snapshot.exists()) return;
+
+            const dados = snapshot.val();
+            const lista = Object.keys(dados).map(key => dados[key]);
+
+            // Ordenação: O primeiro que entrou na fila fica no topo (ordem cronológica)
+            lista.sort((a, b) => (a.dataHora || 0) - (b.dataHora || 0));
+
+            let contPronto = 0;
+            let contPendente = 0;
+
+            lista.forEach((pedido) => {
+                const item = document.createElement('div');
+                item.className = 'item-fila';
+                item.innerHTML = `
+                    <span class="nome">${pedido.convidado}</span>
+                    <span class="drink">${pedido.drink}</span>
+                `;
+
+                if (pedido.status === "pendente" && contPendente < 5) {
+                    divPreparando.appendChild(item);
+                    contPendente++;
+                } else if (pedido.status === "pronto" && contPronto < 5) {
+                    divPronto.appendChild(item);
+                    contPronto++;
+                }
+            });
+        });
+    } else {
+        const agora = new Date();
+        document.getElementById('horaUpdate').innerText =
+            agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        const divPronto = document.getElementById('listaPronto');
+        divPronto.innerHTML = `
+            <div class="item-fila"><span class="nome">Bárbara</span><span class="drink">Mojito Teen</span></div>
+            <div class="item-fila"><span class="nome">Kelli</span><span class="drink">Sex on the Beach</span></div>
+        `;
+        const divPreparando = document.getElementById('listaPreparando');
+        divPreparando.innerHTML = `
+            <div class="item-fila"><span class="nome">Mateus</span><span class="drink">Gin Tônica</span></div>
+        `;
+    }
+</script>
+
+</body>
+</html>
