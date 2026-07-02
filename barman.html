@@ -85,6 +85,38 @@
 </div>
 
 <script type="module">
+    // --- Gate de senha (proteção simples, não é segurança real: qualquer um com acesso
+    // ao código-fonte vê a senha. A proteção de verdade está nas regras do Firebase. ---
+    const SENHA_BARMAN = "barman26";
+    const AUTH_KEY = "barmanAuth";
+
+    function acessoLiberado() {
+        return sessionStorage.getItem(AUTH_KEY) === "ok";
+    }
+
+    function pedirSenha() {
+        for (let tentativas = 0; tentativas < 3; tentativas++) {
+            const digitada = prompt("Senha do painel do barman:");
+            if (digitada === null) break; // cancelou
+            if (digitada === SENHA_BARMAN) {
+                sessionStorage.setItem(AUTH_KEY, "ok");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    if (!acessoLiberado() && !pedirSenha()) {
+        document.body.innerHTML = `
+            <div class="container">
+                <header>
+                    <h1>Acesso Negado</h1>
+                    <p>Senha incorreta ou não informada</p>
+                </header>
+            </div>`;
+        throw new Error("Acesso não autorizado ao painel do barman.");
+    }
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -147,6 +179,9 @@
                 badgeHtml = `<span class="badge-alcool badge-sem">🟢 SEM ÁLCOOL</span>`;
             }
 
+            // Nome exibido: remove o sufixo "(Com/Sem Álcool)" pois o badge já informa isso
+            const nomeExibido = (pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, '');
+
             const card = document.createElement('div');
             card.className = 'card-pedido';
 
@@ -155,7 +190,7 @@
                 card.innerHTML = `
                     <div class="info-pedido">
                         <span class="nome-convidado">${pedido.convidado}</span>
-                        <span class="nome-drink">${pedido.drink}</span>
+                        <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
                     </div>
@@ -167,7 +202,7 @@
                 card.innerHTML = `
                     <div class="info-pedido">
                         <span class="nome-convidado">${pedido.convidado}</span>
-                        <span class="nome-drink">${pedido.drink}</span>
+                        <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pronto às ${horaFormatada}</span>
                     </div>
