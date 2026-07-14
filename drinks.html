@@ -571,14 +571,24 @@
     let drinkAtual = "";
     let enviando = false;
 
-    // Evita spam de pedidos: 2 minutos de intervalo mínimo entre pedidos do mesmo aparelho
+    // Evita spam de pedidos: só avisa (sem travar) se o MESMO nome pedir de novo rápido demais.
+    // Nome diferente no mesmo aparelho passa direto — é normal alguém pedir pra outra pessoa da mesa.
     const COOLDOWN_MS = 2 * 60 * 1000;
-    const COOLDOWN_KEY = 'ultimoPedidoTimestamp';
+    const COOLDOWN_KEY = 'ultimoPedidoInfo';
 
-    function tempoRestanteCooldown() {
-        const ultimo = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
-        const restante = COOLDOWN_MS - (Date.now() - ultimo);
-        return restante > 0 ? restante : 0;
+    function obterUltimoPedidoLocal() {
+        try {
+            return JSON.parse(localStorage.getItem(COOLDOWN_KEY) || 'null');
+        } catch {
+            return null;
+        }
+    }
+
+    function ehPedidoRepetido(nome) {
+        const ultimo = obterUltimoPedidoLocal();
+        if (!ultimo) return false;
+        const dentroDoCooldown = (Date.now() - ultimo.timestamp) < COOLDOWN_MS;
+        return dentroDoCooldown && ultimo.nome === nome.trim().toLowerCase();
     }
 
     let toastTimer = null;
@@ -641,11 +651,9 @@
             return;
         }
 
-        const restante = tempoRestanteCooldown();
-        if (restante > 0) {
-            const segundos = Math.ceil(restante / 1000);
-            mostrarToast("Aguarde um pouco", `Você já fez um pedido recentemente. Tente novamente em ${segundos}s.`, true);
-            return;
+        if (ehPedidoRepetido(nomeInput)) {
+            const confirmar = window.confirm(`Você já fez um pedido como "${nomeInput}" há pouco. Quer confirmar mais um pedido mesmo assim?`);
+            if (!confirmar) return;
         }
 
         nomeInput = nomeInput.charAt(0).toUpperCase() + nomeInput.slice(1).toLowerCase();
@@ -672,7 +680,7 @@
 
         push(pedidosRef, dadosPedido)
             .then(() => {
-                localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
+                localStorage.setItem(COOLDOWN_KEY, JSON.stringify({ nome: nomeInput.toLowerCase(), timestamp: Date.now() }));
                 window.fecharPedido();
                 mostrarToast("Pedido Enviado! 🍹", `${nomeInput}, seu ${drinkAtual} está na fila. Fique de olho no painel do balcão!`);
             })

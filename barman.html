@@ -229,7 +229,7 @@
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
                     </div>
-                    <button class="btn-acao btn-concluir" onclick="mudarStatus('${pedido.id}', 'pronto')">Pronto ➔</button>
+                    <button class="btn-acao btn-concluir" onclick="mudarStatus('${pedido.id}', 'pronto')">Concluir ➔</button>
                 `;
                 divFazendo.appendChild(card);
             } else if (pedido.status === "pronto") {
