@@ -4,49 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Barman — 15 Anos Bárbara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0f0407; color: #fff; padding: 1.5rem; }
         .container { width: 100%; max-width: 700px; margin: 0 auto; }
 
-        header { text-align: center; margin-bottom: 2rem; border-bottom: 2px solid #b05570; padding-bottom: 1rem; }
-        header h1 { font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; color: #f7dde6; }
-        header p { font-size: 11px; color: #c98fa0; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        header { text-align: center; margin-bottom: 2rem; border-bottom: 2px solid #A8506E; padding-bottom: 1rem; }
+        header h1 { font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; color: #F7DEE5; }
+        header p { font-size: 11px; color: #C9A876; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-        .painel-trabalho { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .col-barman { background: #1a080e; border-radius: 20px; padding: 1.2rem; border: 1px solid rgba(240, 185, 200, 0.1); display: flex; flex-direction: column; gap: 1rem; }
+        .painel-trabalho { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+        .col-barman { background: #1a080e; border-radius: 20px; padding: 1.2rem; border: 1px solid rgba(168, 80, 110, 0.2); display: flex; flex-direction: column; gap: 1rem; }
 
-        .titulo-col { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(240, 185, 200, 0.2); }
+        .titulo-col { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(168, 80, 110, 0.3); }
         .tit-pendente { color: #ffb74d; }
+        .tit-fazendo { color: #C9A876; }
         .tit-pronto { color: #81c784; }
 
-        .card-pedido { background: linear-gradient(135deg, #260f16 0%, #361822 100%); border: 1px solid rgba(240, 185, 200, 0.2); border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .card-pedido { background: linear-gradient(135deg, #260f16 0%, #361822 100%); border: 1px solid rgba(168, 80, 110, 0.3); border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
         .info-pedido { display: flex; flex-direction: column; gap: 0.25rem; }
         .nome-convidado { font-size: 15px; font-weight: 700; color: #fff; }
-        .nome-drink { font-size: 12px; font-weight: 600; color: #f0b9c8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .horario { font-size: 9.5px; color: #a37a86; margin-top: 0.2rem; }
+        .nome-drink { font-size: 12px; font-weight: 600; color: #F7DEE5; text-transform: uppercase; letter-spacing: 0.05em; }
+        .horario { font-size: 9.5px; color: #C9A876; margin-top: 0.2rem; }
 
         .badge-alcool { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.1rem; font-family: 'Montserrat', sans-serif; }
         .badge-com { background: #ff4444; color: #fff; border: 1px solid #ffcccc; }
         .badge-sem { background: #00c851; color: #fff; border: 1px solid #ccffcc; }
 
-        .btn-acao { width: 100%; padding: 0.75rem; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s ease; }
-        .btn-concluir { background: #e8b4c4; color: #120509; box-shadow: 0 0 10px rgba(232, 180, 196, 0.4); }
-        .btn-concluir:hover { background: #f7dde6; box-shadow: 0 0 15px rgba(232, 180, 196, 0.6); }
+        .btn-acao { width: 100%; padding: 0.75rem; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s ease; }
+        .btn-iniciar { background: #C9A876; color: #2a1f10; box-shadow: 0 0 10px rgba(201, 168, 118, 0.5); }
+        .btn-iniciar:hover { background: #d9bd8f; box-shadow: 0 0 15px rgba(201, 168, 118, 0.7); }
+        .btn-concluir { background: #A8506E; color: #fff; box-shadow: 0 0 10px rgba(168, 80, 110, 0.5); }
+        .btn-concluir:hover { background: #8F3F5A; box-shadow: 0 0 15px rgba(168, 80, 110, 0.7); }
         .btn-entregar { background: #00c851; color: #fff; box-shadow: 0 0 10px rgba(0, 200, 81, 0.4); }
         .btn-entregar:hover { background: #00e676; box-shadow: 0 0 15px rgba(0, 200, 81, 0.6); }
 
-        .sem-pedidos { text-align: center; color: #8c606d; font-size: 12px; padding: 2rem 0; font-style: italic; }
-        @media (max-width: 600px) { .painel-trabalho { grid-template-columns: 1fr; } }
+        .sem-pedidos { font-family: 'Lora', serif; text-align: center; color: #8c606d; font-size: 12px; padding: 2rem 0; font-style: italic; }
+        @media (max-width: 900px) { .painel-trabalho { grid-template-columns: 1fr; } }
 
-        .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e0b11; border: 1.5px solid rgba(240, 185, 200, 0.3); border-radius: 14px; padding: 0.9rem 1.3rem; box-shadow: 0 8px 28px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 0.7rem; max-width: 320px; width: calc(100% - 2rem); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+        .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e0b11; border: 1.5px solid rgba(168, 80, 110, 0.4); border-radius: 14px; padding: 0.9rem 1.3rem; box-shadow: 0 8px 28px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 0.7rem; max-width: 320px; width: calc(100% - 2rem); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
         .toast.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
         .toast-icon { font-size: 18px; flex-shrink: 0; }
         .toast-body { display: flex; flex-direction: column; gap: 0.1rem; }
-        .toast-title { font-size: 11px; font-weight: 700; color: #f0b9c8; letter-spacing: 0.08em; text-transform: uppercase; }
-        .toast-msg { font-size: 11px; color: #c98fa0; line-height: 1.4; }
+        .toast-title { font-size: 11px; font-weight: 700; color: #F7DEE5; letter-spacing: 0.08em; text-transform: uppercase; }
+        .toast-msg { font-family: 'Lora', serif; font-size: 11px; color: #C9A876; line-height: 1.4; }
         .toast.toast-erro { border-color: rgba(198, 40, 40, 0.4); }
         .toast.toast-erro .toast-title { color: #ef9a9a; }
     </style>
@@ -76,7 +80,14 @@
         </div>
 
         <div class="col-barman">
-            <h2 class="titulo-col tit-pronto">🛎️ No Balcão (Prontos)</h2>
+            <h2 class="titulo-col tit-fazendo">🥃 Fazendo</h2>
+            <div id="listaFazendo">
+                <div class="sem-pedidos">Nenhum drink em preparo...</div>
+            </div>
+        </div>
+
+        <div class="col-barman">
+            <h2 class="titulo-col tit-pronto">🛎️ No Balcão</h2>
             <div id="listaProntos">
                 <div class="sem-pedidos">Nenhum drink aguardando retirada...</div>
             </div>
@@ -134,6 +145,13 @@
     const database = getDatabase(app);
     const pedidosRef = ref(database, 'pedidos');
 
+    // Evita XSS: nomes de convidados vêm de input livre e são inseridos via innerHTML
+    function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+    }
+
     // NOVA LISTA CORRETA DE DRINKS COM ÁLCOOL (Identifica perfeitamente)
     const drinksComAlcool = [
         'Drink da Aniversariante (Com Álcool)',
@@ -147,13 +165,16 @@
 
     onValue(pedidosRef, (snapshot) => {
         const divPendentes = document.getElementById('listaPendentes');
+        const divFazendo = document.getElementById('listaFazendo');
         const divProntos = document.getElementById('listaProntos');
 
         divPendentes.innerHTML = "";
+        divFazendo.innerHTML = "";
         divProntos.innerHTML = "";
 
         if (!snapshot.exists()) {
             divPendentes.innerHTML = '<div class="sem-pedidos">Nenhum drink pendente...</div>';
+            divFazendo.innerHTML = '<div class="sem-pedidos">Nenhum drink em preparo...</div>';
             divProntos.innerHTML = '<div class="sem-pedidos">Nenhum drink aguardando retirada...</div>';
             return;
         }
@@ -163,6 +184,7 @@
         listaOrdenada.sort((a, b) => (a.dataHora || 0) - (b.dataHora || 0));
 
         let qtdPendentes = 0;
+        let qtdFazendo = 0;
         let qtdProntos = 0;
 
         listaOrdenada.forEach((pedido) => {
@@ -180,7 +202,8 @@
             }
 
             // Nome exibido: remove o sufixo "(Com/Sem Álcool)" pois o badge já informa isso
-            const nomeExibido = (pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, '');
+            const nomeExibido = escapeHtml((pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, ''));
+            const nomeConvidado = escapeHtml(pedido.convidado);
 
             const card = document.createElement('div');
             card.className = 'card-pedido';
@@ -189,19 +212,31 @@
                 qtdPendentes++;
                 card.innerHTML = `
                     <div class="info-pedido">
-                        <span class="nome-convidado">${pedido.convidado}</span>
+                        <span class="nome-convidado">${nomeConvidado}</span>
+                        <span class="nome-drink">${nomeExibido}</span>
+                        ${badgeHtml}
+                        <span class="horario">Pedido às ${horaFormatada}</span>
+                    </div>
+                    <button class="btn-acao btn-iniciar" onclick="mudarStatus('${pedido.id}', 'fazendo')">Iniciar ▶</button>
+                `;
+                divPendentes.appendChild(card);
+            } else if (pedido.status === "fazendo") {
+                qtdFazendo++;
+                card.innerHTML = `
+                    <div class="info-pedido">
+                        <span class="nome-convidado">${nomeConvidado}</span>
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
                     </div>
                     <button class="btn-acao btn-concluir" onclick="mudarStatus('${pedido.id}', 'pronto')">Pronto ➔</button>
                 `;
-                divPendentes.appendChild(card);
+                divFazendo.appendChild(card);
             } else if (pedido.status === "pronto") {
                 qtdProntos++;
                 card.innerHTML = `
                     <div class="info-pedido">
-                        <span class="nome-convidado">${pedido.convidado}</span>
+                        <span class="nome-convidado">${nomeConvidado}</span>
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pronto às ${horaFormatada}</span>
@@ -213,6 +248,7 @@
         });
 
         if (qtdPendentes === 0) divPendentes.innerHTML = '<div class="sem-pedidos">Nenhum drink pendente...</div>';
+        if (qtdFazendo === 0) divFazendo.innerHTML = '<div class="sem-pedidos">Nenhum drink em preparo...</div>';
         if (qtdProntos === 0) divProntos.innerHTML = '<div class="sem-pedidos">Nenhum drink aguardando retirada...</div>';
     });
 
@@ -231,7 +267,12 @@
 
     window.mudarStatus = function(idPedido, novoStatus) {
         const pedidoEspecificoRef = ref(database, `pedidos/${idPedido}`);
-        const labelAcao = novoStatus === 'pronto' ? 'marcado como pronto' : 'entregue ao convidado';
+        const labelsAcao = {
+            fazendo: 'iniciado pelo barman',
+            pronto: 'marcado como pronto',
+            entregue: 'entregue ao convidado'
+        };
+        const labelAcao = labelsAcao[novoStatus] || 'atualizado';
 
         update(pedidoEspecificoRef, { status: novoStatus })
             .then(() => mostrarToast('Status Atualizado', `Pedido ${labelAcao} com sucesso.`))

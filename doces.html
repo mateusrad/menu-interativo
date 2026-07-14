@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doces — 15 Anos Bárbara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500;1,600&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,18 +16,18 @@
             flex-direction: column; /* Necessário para a assinatura no rodapé */
             align-items: center;
             justify-content: center;
-            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            background: linear-gradient(160deg, #F7DEE5 0%, #FBEAEF 100%);
             padding: 2rem 1rem;
         }
 
         .card {
             width: 100%;
             max-width: 380px;
-            background: linear-gradient(175deg, #fff5f7 0%, #fdeef2 100%);
-            border-radius: 32px;
+            background: #FFFFFF;
+            border-radius: 24px;
             padding: 2rem 1.8rem 2.2rem;
-            box-shadow: 0 12px 40px rgba(180, 80, 110, 0.13);
-            border: 1px solid rgba(240, 185, 200, 0.5);
+            box-shadow: 0 8px 24px rgba(168, 80, 110, 0.15);
+            border: 1px solid rgba(168, 80, 110, 0.12);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -36,7 +37,7 @@
             align-self: flex-start;
             font-size: 11px;
             font-weight: 700;
-            color: #c0607c;
+            color: #A8506E;
             text-decoration: none;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -47,19 +48,19 @@
             transition: color 0.2s ease;
         }
 
-        .btn-voltar:hover { color: #b05570; }
+        .btn-voltar:hover { color: #8F3F5A; }
 
-        .badge-15 { width: 56px; height: 56px; border-radius: 50%; border: 2px solid #d4869e; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
-        .badge-15 span { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #c0607c; letter-spacing: -0.03em; }
+        .badge-15 { width: 56px; height: 56px; border-radius: 50%; border: 2px solid #A8506E; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #C9A876; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; background: #FFFFFF; }
+        .badge-15 span { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: #A8506E; letter-spacing: -0.02em; }
 
-        .header-name { font-size: 13px; font-weight: 700; letter-spacing: 0.22em; color: #b05570; text-transform: uppercase; text-align: center; line-height: 1.4; margin-bottom: 0.1rem; }
-        .header-sub { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; color: #c98fa0; text-transform: uppercase; text-align: center; margin-bottom: 1.8rem; }
+        .header-name { font-size: 13px; font-weight: 700; letter-spacing: 0.22em; color: #A8506E; text-transform: uppercase; text-align: center; line-height: 1.4; margin-bottom: 0.1rem; }
+        .header-sub { font-family: 'Lora', serif; font-style: italic; font-size: 12px; font-weight: 400; letter-spacing: 0.02em; color: #5C3A45; text-align: center; margin-bottom: 1.8rem; }
 
-        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: #b05570; margin: 1.4rem 0 0.6rem; align-self: flex-start; border-bottom: 1px solid #e8b4c4; width: 100%; padding-bottom: 0.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: #A8506E; margin: 1.4rem 0 0.6rem; align-self: flex-start; border-bottom: 1px solid #C9A876; width: 100%; padding-bottom: 0.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
         .item-list { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
 
-        .menu-item { width: 100%; padding: 1rem 1.4rem; border-radius: 18px; background: #fff; color: #b05570; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; box-shadow: 0 2px 8px rgba(200, 120, 150, 0.07); border: 1.5px solid #e8b4c4; line-height: 1.4; }
+        .menu-item { width: 100%; padding: 1rem 1.4rem; border-radius: 18px; background: #fff; color: #5C3A45; font-family: 'Lora', serif; font-size: 13px; font-weight: 400; letter-spacing: 0.01em; box-shadow: 0 2px 8px rgba(168, 80, 110, 0.07); border: 1.5px solid rgba(168, 80, 110, 0.2); line-height: 1.4; }
 
         /* ── Assinatura ── */
         .developer-signature {
@@ -68,16 +69,16 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            color: #c8889c;
+            color: #5C3A45;
             font-size: 11px;
             margin-top: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.75;
             transition: opacity 0.2s, color 0.2s;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .developer-signature:hover { opacity: 1; color: #A8506E; }
         .dev-logo {
             height: 18px;
             width: auto;
@@ -86,7 +87,7 @@
             mix-blend-mode: multiply;
         }
         .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-        .developer-signature:hover .dev-name { border-color: #b05570; }
+        .developer-signature:hover .dev-name { border-color: #A8506E; }
     </style>
 </head>
 <body>

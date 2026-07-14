@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drinks — 15 Anos Bárbara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500;1,600&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,7 +16,7 @@
             flex-direction: column; /* Necessário para a assinatura ficar no rodapé */
             align-items: center;
             justify-content: center;
-            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            background: linear-gradient(160deg, #F7DEE5 0%, #FBEAEF 100%);
             padding: 2rem 1rem;
             overflow-x: hidden;
         }
@@ -23,11 +24,11 @@
         .card {
             width: 100%;
             max-width: 380px;
-            background: linear-gradient(175deg, #fff5f7 0%, #fdeef2 100%);
-            border-radius: 32px;
+            background: #FFFFFF;
+            border-radius: 24px;
             padding: 2rem 1.8rem 2.2rem;
-            box-shadow: 0 12px 40px rgba(180, 80, 110, 0.13);
-            border: 1px solid rgba(240, 185, 200, 0.5);
+            box-shadow: 0 8px 24px rgba(168, 80, 110, 0.15);
+            border: 1px solid rgba(168, 80, 110, 0.12);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -37,7 +38,7 @@
             align-self: flex-start;
             font-size: 11px;
             font-weight: 700;
-            color: #c0607c;
+            color: #A8506E;
             text-decoration: none;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -48,32 +49,34 @@
             transition: color 0.2s ease;
         }
 
-        .btn-voltar:hover { color: #b05570; }
+        .btn-voltar:hover { color: #8F3F5A; }
 
         .badge-15 {
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            border: 2px solid #d4869e;
+            border: 2px solid #A8506E;
+            box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #C9A876;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            background: #FFFFFF;
         }
 
         .badge-15 span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: #c0607c;
-            letter-spacing: -0.03em;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #A8506E;
+            letter-spacing: -0.02em;
         }
 
         .header-name {
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 0.22em;
-            color: #b05570;
+            color: #A8506E;
             text-transform: uppercase;
             text-align: center;
             line-height: 1.4;
@@ -81,11 +84,12 @@
         }
 
         .header-sub {
+            font-family: 'Lora', serif;
+            font-style: italic;
             font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.16em;
-            color: #c98fa0;
-            text-transform: uppercase;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #5C3A45;
             text-align: center;
             margin-bottom: 1.2rem;
         }
@@ -93,10 +97,10 @@
         .btn-ver-fila {
             width: 100%;
             padding: 0.75rem 1rem;
-            border-radius: 14px;
+            border-radius: 999px;
             background: #fffbfd;
-            border: 1.5px dashed #e8b4c4;
-            color: #c0607c;
+            border: 1.5px dashed rgba(168, 80, 110, 0.35);
+            color: #A8506E;
             font-family: 'Montserrat', sans-serif;
             font-size: 10.5px;
             font-weight: 700;
@@ -105,25 +109,25 @@
             text-decoration: none;
             text-align: center;
             margin-bottom: 1rem;
-            box-shadow: 0 2px 6px rgba(200, 120, 150, 0.04);
+            box-shadow: 0 2px 6px rgba(168, 80, 110, 0.05);
             transition: all 0.2s ease;
         }
 
         .btn-ver-fila:hover {
-            background: #fce8ef;
+            background: #FBEAEF;
             border-style: solid;
-            border-color: #d48099;
-            color: #b05570;
+            border-color: #A8506E;
+            color: #8F3F5A;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 16px;
             font-weight: 600;
-            color: #b05570;
+            color: #A8506E;
             margin: 1.4rem 0 0.6rem;
             align-self: flex-start;
-            border-bottom: 1px solid #e8b4c4;
+            border-bottom: 1px solid #C9A876;
             width: 100%;
             padding-bottom: 0.2rem;
             text-transform: uppercase;
@@ -131,8 +135,8 @@
         }
 
         .title-alcool {
-            color: #9c405a;
-            border-color: #d4869e;
+            color: #8F3F5A;
+            border-color: #C9A876;
         }
 
         .item-list {
@@ -145,16 +149,16 @@
         .menu-item-btn {
             width: 100%;
             padding: 1.1rem 1.3rem;
-            border-radius: 18px;
+            border-radius: 999px;
             background: #fff;
-            color: #b05570;
+            color: #A8506E;
             font-family: 'Montserrat', sans-serif;
             font-size: 11.5px;
             font-weight: 700;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(200, 120, 150, 0.06);
-            border: 1.5px solid #e8b4c4;
+            box-shadow: 0 2px 8px rgba(168, 80, 110, 0.07);
+            border: 1.5px solid rgba(168, 80, 110, 0.2);
             line-height: 1.3;
             text-align: left;
             cursor: pointer;
@@ -165,10 +169,10 @@
         }
 
         .menu-item-btn:hover {
-            background: #fce8ef;
-            border-color: #d48099;
+            background: #FBEAEF;
+            border-color: #A8506E;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(200, 100, 130, 0.12);
+            box-shadow: 0 4px 12px rgba(168, 80, 110, 0.15);
         }
 
         .badge-tag {
@@ -189,7 +193,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(140, 60, 85, 0.4);
+            background: rgba(92, 58, 69, 0.4);
             backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
@@ -213,7 +217,7 @@
             border-radius: 24px;
             padding: 1.6rem 1.5rem;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(240, 185, 200, 0.6);
+            border: 1px solid rgba(168, 80, 110, 0.2);
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
@@ -229,7 +233,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 19px;
             font-weight: 600;
-            color: #b05570;
+            color: #A8506E;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -239,33 +243,35 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 11.5px;
             font-weight: 700;
-            color: #b05570;
-            background: #fce8ef;
+            color: #A8506E;
+            background: #FBEAEF;
             padding: 0.6rem 1rem;
-            border-radius: 50px;
+            border-radius: 999px;
             text-align: center;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            border: 1px solid #e8b4c4;
+            border: 1px solid rgba(168, 80, 110, 0.2);
         }
 
         .ingredients-box {
             background: #fffdfd;
-            border: 1px dashed #e8b4c4;
+            border: 1px dashed rgba(168, 80, 110, 0.3);
             border-radius: 12px;
             padding: 0.75rem 1rem;
-            font-size: 11px;
-            color: #666;
+            font-family: 'Lora', serif;
+            font-size: 12px;
+            color: #5C3A45;
             line-height: 1.5;
             text-align: center;
             font-style: italic;
         }
 
         .ingredients-box strong {
+            font-family: 'Montserrat', sans-serif;
             font-style: normal;
             font-size: 10px;
             text-transform: uppercase;
-            color: #b05570;
+            color: #A8506E;
             display: block;
             margin-bottom: 0.2rem;
             letter-spacing: 0.05em;
@@ -280,7 +286,7 @@
         .input-group label {
             font-size: 10px;
             font-weight: 700;
-            color: #c98fa0;
+            color: #5C3A45;
             text-transform: uppercase;
             letter-spacing: 0.12em;
             padding-left: 0.3rem;
@@ -289,17 +295,17 @@
         .input-group input {
             width: 100%;
             padding: 0.85rem 1.1rem;
-            border-radius: 14px;
-            border: 1.5px solid #f0b9c8;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            color: #555;
+            border-radius: 999px;
+            border: 1.5px solid rgba(168, 80, 110, 0.3);
+            font-family: 'Lora', serif;
+            font-size: 14px;
+            color: #5C3A45;
             outline: none;
             text-align: center;
         }
 
         .input-group input:focus {
-            border-color: #b05570;
+            border-color: #A8506E;
         }
 
         .modal-actions {
@@ -311,7 +317,7 @@
         .btn-action {
             flex: 1;
             padding: 0.85rem;
-            border-radius: 14px;
+            border-radius: 999px;
             font-family: 'Montserrat', sans-serif;
             font-size: 11px;
             font-weight: 700;
@@ -324,8 +330,8 @@
         .btn-cancelar { background: #f5f5f5; color: #888; }
         .btn-cancelar:hover { background: #e0e0e0; }
 
-        .btn-confirmar { background: #b05570; color: #fff; box-shadow: 0 4px 12px rgba(176, 85, 112, 0.2); transition: background 0.2s, opacity 0.2s; }
-        .btn-confirmar:hover:not(:disabled) { background: #96435c; }
+        .btn-confirmar { background: #A8506E; color: #fff; box-shadow: 0 4px 12px rgba(168, 80, 110, 0.25); transition: background 0.2s, opacity 0.2s; }
+        .btn-confirmar:hover:not(:disabled) { background: #8F3F5A; }
         .btn-confirmar:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .toast {
@@ -334,10 +340,10 @@
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: #fff;
-            border: 1.5px solid #e8b4c4;
+            border: 1.5px solid rgba(168, 80, 110, 0.25);
             border-radius: 16px;
             padding: 1rem 1.4rem;
-            box-shadow: 0 8px 28px rgba(180, 80, 110, 0.18);
+            box-shadow: 0 8px 28px rgba(168, 80, 110, 0.18);
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
@@ -362,14 +368,15 @@
         .toast-title {
             font-size: 12px;
             font-weight: 700;
-            color: #b05570;
+            color: #A8506E;
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         .toast-msg {
+            font-family: 'Lora', serif;
             font-size: 12px;
-            color: #666;
+            color: #5C3A45;
             line-height: 1.4;
         }
 
@@ -383,16 +390,16 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            color: #c8889c;
+            color: #5C3A45;
             font-size: 11px;
             margin-top: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.75;
             transition: opacity 0.2s, color 0.2s;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .developer-signature:hover { opacity: 1; color: #A8506E; }
         .dev-logo {
             height: 18px;
             width: auto;
@@ -401,7 +408,7 @@
             mix-blend-mode: multiply;
         }
         .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-        .developer-signature:hover .dev-name { border-color: #b05570; }
+        .developer-signature:hover .dev-name { border-color: #A8506E; }
     </style>
 </head>
 <body>
@@ -489,7 +496,7 @@
 
         <div class="input-group">
             <label for="nomeConvidado">Seu Primeiro Nome</label>
-            <input type="text" id="nomeConvidado" placeholder="Ex: Ricardo" required>
+            <input type="text" id="nomeConvidado" placeholder="Ex: Ricardo" maxlength="20" required>
         </div>
 
         <div class="modal-actions">
@@ -564,6 +571,16 @@
     let drinkAtual = "";
     let enviando = false;
 
+    // Evita spam de pedidos: 2 minutos de intervalo mínimo entre pedidos do mesmo aparelho
+    const COOLDOWN_MS = 2 * 60 * 1000;
+    const COOLDOWN_KEY = 'ultimoPedidoTimestamp';
+
+    function tempoRestanteCooldown() {
+        const ultimo = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
+        const restante = COOLDOWN_MS - (Date.now() - ultimo);
+        return restante > 0 ? restante : 0;
+    }
+
     let toastTimer = null;
     window.mostrarToast = function(titulo, mensagem, erro = false) {
         const toast = document.getElementById('toastNotif');
@@ -624,6 +641,13 @@
             return;
         }
 
+        const restante = tempoRestanteCooldown();
+        if (restante > 0) {
+            const segundos = Math.ceil(restante / 1000);
+            mostrarToast("Aguarde um pouco", `Você já fez um pedido recentemente. Tente novamente em ${segundos}s.`, true);
+            return;
+        }
+
         nomeInput = nomeInput.charAt(0).toUpperCase() + nomeInput.slice(1).toLowerCase();
 
         enviando = true;
@@ -648,6 +672,7 @@
 
         push(pedidosRef, dadosPedido)
             .then(() => {
+                localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
                 window.fecharPedido();
                 mostrarToast("Pedido Enviado! 🍹", `${nomeInput}, seu ${drinkAtual} está na fila. Fique de olho no painel do balcão!`);
             })

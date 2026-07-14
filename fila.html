@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fila do Bar — 15 Anos Bárbara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(160deg, #f7dde6 0%, #f9ece8 50%, #f5d8e2 100%);
+            background: linear-gradient(160deg, #F7DEE5 0%, #FBEAEF 100%);
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
@@ -20,31 +21,31 @@
         }
 
         .top-navigation { width: 100%; max-width: 600px; display: flex; margin-bottom: 0.2rem; }
-        .btn-voltar { font-size: 11px; font-weight: 700; color: #c0607c; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.3rem; }
+        .btn-voltar { font-size: 11px; font-weight: 700; color: #A8506E; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.3rem; }
 
         .logo-header { text-align: center; width: 100%; margin-bottom: 1.2rem; }
-        .logo-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: #b05570; letter-spacing: 0.05em; text-transform: uppercase; }
-        .logo-header p { font-size: 10px; font-weight: 700; color: #c98fa0; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.1rem; }
+        .logo-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: #A8506E; letter-spacing: 0.05em; text-transform: uppercase; }
+        .logo-header p { font-family: 'Lora', serif; font-style: italic; font-size: 11px; font-weight: 400; color: #5C3A45; letter-spacing: 0.02em; margin-top: 0.1rem; }
 
         .painel-fila { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 1rem; flex-grow: 1; }
 
-        .coluna { background: linear-gradient(175deg, #fff9f2 0%, #fdf2e4 100%); border-radius: 20px; border: 2px solid rgba(255, 152, 0, 0.3); padding: 1.2rem; backdrop-filter: blur(8px); display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(180, 80, 110, 0.04); overflow: hidden; }
-        .coluna-pronto { background: linear-gradient(175deg, #fff2f5 0%, #fdeef2 100%); border: 2px solid #e8b4c4; box-shadow: 0 12px 30px rgba(180, 80, 110, 0.12); transform: scale(1.02); }
+        .coluna { background: #FFFFFF; border-radius: 20px; border: 2px solid rgba(201, 168, 118, 0.35); padding: 1.2rem; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(168, 80, 110, 0.06); overflow: hidden; }
+        .coluna-pronto { background: #FFFFFF; border: 2px solid #A8506E; box-shadow: 0 12px 30px rgba(168, 80, 110, 0.18); transform: scale(1.02); }
 
         .coluna-titulo { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin: -1.2rem -1.2rem 1rem -1.2rem; padding: 0.9rem 0.5rem; }
-        .titulo-preparando { color: #e65100; background: linear-gradient(90deg, #ffe9d1, #ffd9a8); border-bottom: 2px solid #ffb74d; }
-        .titulo-pronto { color: #7a2e46; background: linear-gradient(90deg, #f8d3de, #f0b9c8); border-bottom: 2px solid #b05570; font-size: 14px; }
+        .titulo-preparando { color: #8F3F5A; background: #FBEAEF; border-bottom: 2px solid #C9A876; }
+        .titulo-pronto { color: #FFFFFF; background: linear-gradient(90deg, #A8506E, #8F3F5A); border-bottom: 2px solid #C9A876; font-size: 14px; }
 
-        .divisor-fila { display: flex; align-items: center; justify-content: center; gap: 0.6rem; color: #c98fa0; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; }
-        .divisor-fila::before, .divisor-fila::after { content: ""; height: 1px; width: 60px; background: rgba(180, 80, 110, 0.25); }
+        .divisor-fila { display: flex; align-items: center; justify-content: center; gap: 0.6rem; color: #5C3A45; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; }
+        .divisor-fila::before, .divisor-fila::after { content: ""; height: 1px; width: 60px; background: rgba(168, 80, 110, 0.25); }
 
         .lista-nomes { display: flex; flex-direction: column; gap: 0.5rem; }
 
-        .item-fila { background: #fff; padding: 0.8rem 1.2rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(232, 180, 196, 0.2); flex-wrap: wrap; gap: 8px;}
-        .item-fila .nome { font-size: 14px; font-weight: 700; color: #555; }
+        .item-fila { background: #fff; padding: 0.8rem 1.2rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(168, 80, 110, 0.15); flex-wrap: wrap; gap: 8px;}
+        .item-fila .nome { font-size: 14px; font-weight: 700; color: #5C3A45; }
 
         .drink-wrap { display: flex; align-items: center; gap: 6px; }
-        .item-fila .drink { font-size: 10px; font-weight: 600; color: #c98fa0; text-transform: uppercase; letter-spacing: 0.05em; background: #faf2f4; padding: 0.2rem 0.5rem; border-radius: 6px; }
+        .item-fila .drink { font-family: 'Lora', serif; font-size: 10.5px; font-weight: 400; color: #5C3A45; letter-spacing: 0.01em; background: #FBEAEF; padding: 0.2rem 0.5rem; border-radius: 6px; }
 
         /* Etiquetas de Álcool */
         .badge-alcool-fila { font-size: 8px; font-weight: 800; padding: 0.2rem 0.4rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;}
@@ -55,27 +56,27 @@
         .status-preparando { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
         .status-pronto { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
 
-        .coluna-pronto .item-fila { border-color: #e8b4c4; animation: pulse-brilho 2s infinite alternate; }
-        .coluna-pronto .item-fila .nome { color: #b05570; font-size: 15px; }
-        .coluna-pronto .item-fila .drink { background: #fce8ef; color: #b05570; }
+        .coluna-pronto .item-fila { border-color: #A8506E; animation: pulse-brilho 2s infinite alternate; }
+        .coluna-pronto .item-fila .nome { color: #A8506E; font-size: 15px; }
+        .coluna-pronto .item-fila .drink { background: #FBEAEF; color: #A8506E; }
 
         @keyframes pulse-brilho {
-            0% { box-shadow: 0 2px 6px rgba(180, 80, 110, 0.02); }
-            100% { box-shadow: 0 4px 12px rgba(180, 80, 110, 0.12); border-color: #d4869e; }
+            0% { box-shadow: 0 2px 6px rgba(168, 80, 110, 0.03); }
+            100% { box-shadow: 0 4px 12px rgba(168, 80, 110, 0.18); border-color: #C9A876; }
         }
 
-        .live-bar { width: 100%; max-width: 600px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 10.5px; font-weight: 600; color: #c98fa0; letter-spacing: 0.08em; text-transform: uppercase; }
+        .live-bar { width: 100%; max-width: 600px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 10.5px; font-weight: 600; color: #5C3A45; letter-spacing: 0.08em; text-transform: uppercase; }
         .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #81c784; flex-shrink: 0; animation: piscar 1.8s ease-in-out infinite; }
 
         @keyframes piscar { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-        .sem-pedidos { text-align: center; color: #c98fa0; font-size: 11px; font-style: italic; padding: 1rem 0; }
+        .sem-pedidos { font-family: 'Lora', serif; text-align: center; color: #5C3A45; font-size: 11px; font-style: italic; padding: 1rem 0; }
 
-        .developer-signature { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: #c8889c; font-size: 11px; margin-top: 2rem; margin-bottom: 1rem; opacity: 0.9; transition: opacity 0.2s, color 0.2s; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; width: 100%; }
-        .developer-signature:hover { opacity: 1; color: #b05570; }
+        .developer-signature { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: #5C3A45; font-size: 11px; margin-top: 2rem; margin-bottom: 1rem; opacity: 0.75; transition: opacity 0.2s, color 0.2s; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; width: 100%; }
+        .developer-signature:hover { opacity: 1; color: #A8506E; }
         .dev-logo { height: 18px; width: auto; border-radius: 6px; display: block; mix-blend-mode: multiply; }
         .dev-name { font-weight: 700; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-        .developer-signature:hover .dev-name { border-color: #b05570; }
+        .developer-signature:hover .dev-name { border-color: #A8506E; }
     </style>
 </head>
 <body>
@@ -129,6 +130,13 @@
         appId: "1:1046837961375:web:430ec81a42e46a0ccb38aa"
     };
 
+    // Evita XSS: nomes de convidados vêm de input livre e são inseridos via innerHTML
+    function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+    }
+
     // NOVA LISTA CORRETA DE DRINKS COM ÁLCOOL
     const drinksComAlcool = [
         'Drink da Aniversariante (Com Álcool)',
@@ -177,20 +185,21 @@
             }
 
             // Nome exibido: remove o sufixo "(Com/Sem Álcool)" pois o badge já informa isso
-            const nomeExibido = (pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, '');
+            const nomeExibido = escapeHtml((pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, ''));
+            const nomeConvidado = escapeHtml(pedido.convidado);
 
             const item = document.createElement('div');
             item.className = 'item-fila';
 
             let badgeStatus = '';
-            if (pedido.status === "pendente" && contPendente < 5) {
+            if ((pedido.status === "pendente" || pedido.status === "fazendo") && contPendente < 5) {
                 badgeStatus = `<span class="badge-status status-preparando">Preparando</span>`;
-                item.innerHTML = `<span class="nome">${pedido.convidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
+                item.innerHTML = `<span class="nome">${nomeConvidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
                 divPreparando.appendChild(item);
                 contPendente++;
             } else if (pedido.status === "pronto" && contPronto < 5) {
                 badgeStatus = `<span class="badge-status status-pronto">Pronto</span>`;
-                item.innerHTML = `<span class="nome">${pedido.convidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
+                item.innerHTML = `<span class="nome">${nomeConvidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
                 divPronto.appendChild(item);
                 contPronto++;
             }
