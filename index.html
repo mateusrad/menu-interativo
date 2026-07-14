@@ -80,6 +80,21 @@
             margin-bottom: 1.5rem;
         }
 
+        .mesa-badge {
+            display: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #A8506E;
+            background: #FBEAEF;
+            border: 1px solid rgba(168, 80, 110, 0.25);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1rem;
+        }
+
         /* ── Cronômetro do Bar ── */
         #bar-timer {
             font-size: 11px;
@@ -220,6 +235,7 @@
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">15 anos da<br>Bárbara</p>
     <p class="header-sub"></p>
+    <p class="mesa-badge" id="mesaBadge"></p>
 
     <div id="bar-timer" class="timer-waiting">⏳ Carregando status do bar...</div>
     <p class="bar-horarios">Bar aberto das 19h20 às 20h20 e das 21h30 à 00h30</p>
@@ -264,6 +280,18 @@
 </a>
 
 <script>
+    // Número da mesa vem do QR code lido (ex: index.html?mesa=5). Repassa pro link de drinks,
+    // que é a única página que precisa dessa informação junto com o pedido.
+    const mesaAtual = new URLSearchParams(window.location.search).get('mesa');
+    if (mesaAtual) {
+        const badge = document.getElementById('mesaBadge');
+        badge.textContent = `🪑 Mesa ${mesaAtual}`;
+        badge.style.display = 'inline-block';
+
+        const btnDrinks = document.getElementById('btn-drinks');
+        btnDrinks.href = `drinks.html?mesa=${encodeURIComponent(mesaAtual)}`;
+    }
+
     // Lógica do Cronômetro do Bar
     // CONFIGURAÇÃO: janelas de funcionamento combinadas com a cerimonialista
     const janelasBar = [

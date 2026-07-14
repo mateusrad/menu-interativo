@@ -33,6 +33,7 @@
         .badge-alcool { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.1rem; font-family: 'Montserrat', sans-serif; }
         .badge-com { background: #ff4444; color: #fff; border: 1px solid #ffcccc; }
         .badge-sem { background: #00c851; color: #fff; border: 1px solid #ccffcc; }
+        .badge-mesa { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; background: #A8506E; color: #fff; }
 
         .btn-acao { width: 100%; padding: 0.75rem; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s ease; }
         .btn-iniciar { background: #C9A876; color: #2a1f10; box-shadow: 0 0 10px rgba(201, 168, 118, 0.5); }
@@ -204,6 +205,7 @@
             // Nome exibido: remove o sufixo "(Com/Sem Álcool)" pois o badge já informa isso
             const nomeExibido = escapeHtml((pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, ''));
             const nomeConvidado = escapeHtml(pedido.convidado);
+            const mesaHtml = pedido.mesa ? `<span class="badge-mesa">🪑 Mesa ${escapeHtml(String(pedido.mesa))}</span>` : '';
 
             const card = document.createElement('div');
             card.className = 'card-pedido';
@@ -213,6 +215,7 @@
                 card.innerHTML = `
                     <div class="info-pedido">
                         <span class="nome-convidado">${nomeConvidado}</span>
+                        ${mesaHtml}
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
@@ -225,6 +228,7 @@
                 card.innerHTML = `
                     <div class="info-pedido">
                         <span class="nome-convidado">${nomeConvidado}</span>
+                        ${mesaHtml}
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
@@ -237,6 +241,7 @@
                 card.innerHTML = `
                     <div class="info-pedido">
                         <span class="nome-convidado">${nomeConvidado}</span>
+                        ${mesaHtml}
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pronto às ${horaFormatada}</span>

@@ -94,6 +94,21 @@
             margin-bottom: 1.2rem;
         }
 
+        .mesa-badge {
+            display: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #A8506E;
+            background: #FBEAEF;
+            border: 1px solid rgba(168, 80, 110, 0.25);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1rem;
+        }
+
         .btn-ver-fila {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -419,6 +434,7 @@
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">Cocktails</p>
     <p class="header-sub">Toque para pedir</p>
+    <p class="mesa-badge" id="mesaBadge"></p>
 
     <a href="fila.html" class="btn-ver-fila">Acompanhar Fila de Espera ⏳</a>
 
@@ -527,6 +543,14 @@
         database = getDatabase(app);
     } catch (e) {
         console.log("Erro ao iniciar Firebase:", e);
+    }
+
+    // Número da mesa vem do QR code lido (ex: drinks.html?mesa=5). Sem QR, o campo fica de fora do pedido.
+    const mesaAtual = new URLSearchParams(window.location.search).get('mesa');
+    if (mesaAtual) {
+        const badge = document.getElementById('mesaBadge');
+        badge.textContent = `🪑 Mesa ${mesaAtual}`;
+        badge.style.display = 'inline-block';
     }
 
     const infoDrinks = {
@@ -675,6 +699,10 @@
             status: "pendente",
             dataHora: serverTimestamp()
         };
+
+        if (mesaAtual) {
+            dadosPedido.mesa = mesaAtual;
+        }
 
         const pedidosRef = ref(database, 'pedidos');
 

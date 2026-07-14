@@ -109,6 +109,29 @@
             letter-spacing: 0.1em;
         }
 
+        .disponibilidade {
+            width: 100%;
+            background: #FBEAEF;
+            border: 1px solid rgba(168, 80, 110, 0.2);
+            border-radius: 16px;
+            padding: 0.6rem 0.9rem;
+            margin: -0.2rem 0 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.15rem;
+            text-align: center;
+        }
+
+        .disp-horario {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #A8506E;
+        }
+
         .item-list {
             width: 100%;
             display: flex;
@@ -169,6 +192,9 @@
     <p class="header-sub">Buffet Sr. Joel</p>
 
     <h3 class="section-title">Entrada</h3>
+    <div class="disponibilidade">
+        <span class="disp-horario">⏰ Servido das 19h30 às 20h30</span>
+    </div>
     <div class="item-list">
         <div class="menu-item">Tábua de Frios</div>
         <div class="menu-item">Buffet de Frios</div>
@@ -178,6 +204,9 @@
     </div>
 
     <h3 class="section-title">Finger Food</h3>
+    <div class="disponibilidade">
+        <span class="disp-horario">⏰ Servido das 21h00 às 23h00</span>
+    </div>
     <div class="item-list">
         <div class="menu-item">Risoto a Quatro Queijos</div>
         <div class="menu-item">Rigatoni a Bolonhesa</div>

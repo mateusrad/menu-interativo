@@ -47,6 +47,8 @@
         .drink-wrap { display: flex; align-items: center; gap: 6px; }
         .item-fila .drink { font-family: 'Lora', serif; font-size: 10.5px; font-weight: 400; color: #5C3A45; letter-spacing: 0.01em; background: #FBEAEF; padding: 0.2rem 0.5rem; border-radius: 6px; }
 
+        .mesa-tag-fila { font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: #A8506E; padding: 0.2rem 0.5rem; border-radius: 6px; }
+
         /* Etiquetas de Álcool */
         .badge-alcool-fila { font-size: 8px; font-weight: 800; padding: 0.2rem 0.4rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;}
         .fila-tag-com { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2;}
@@ -187,6 +189,7 @@
             // Nome exibido: remove o sufixo "(Com/Sem Álcool)" pois o badge já informa isso
             const nomeExibido = escapeHtml((pedido.drink || '').replace(/\s*\((Com|Sem)\s*Álcool\)\s*$/i, ''));
             const nomeConvidado = escapeHtml(pedido.convidado);
+            const mesaTag = pedido.mesa ? `<span class="mesa-tag-fila">🪑 Mesa ${escapeHtml(String(pedido.mesa))}</span>` : '';
 
             const item = document.createElement('div');
             item.className = 'item-fila';
@@ -194,12 +197,12 @@
             let badgeStatus = '';
             if ((pedido.status === "pendente" || pedido.status === "fazendo") && contPendente < 5) {
                 badgeStatus = `<span class="badge-status status-preparando">Preparando</span>`;
-                item.innerHTML = `<span class="nome">${nomeConvidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
+                item.innerHTML = `<span class="nome">${nomeConvidado}</span>${mesaTag}<div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
                 divPreparando.appendChild(item);
                 contPendente++;
             } else if (pedido.status === "pronto" && contPronto < 5) {
                 badgeStatus = `<span class="badge-status status-pronto">Pronto</span>`;
-                item.innerHTML = `<span class="nome">${nomeConvidado}</span><div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
+                item.innerHTML = `<span class="nome">${nomeConvidado}</span>${mesaTag}<div class="drink-wrap"><span class="drink">${nomeExibido}</span>${tagAlcool}</div>${badgeStatus}`;
                 divPronto.appendChild(item);
                 contPronto++;
             }
