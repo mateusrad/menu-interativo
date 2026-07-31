@@ -230,6 +230,38 @@
 </head>
 <body>
 
+<script>
+    // --- Trava temporária de acesso, só pra evitar acesso casual antes da festa
+    // (ex: alguém na gráfica testando o QR impresso). Não é segurança real — quem vir
+    // o código-fonte vê a senha. Libera sozinha a partir da data configurada abaixo.
+    const SENHA_MENU = "bar15anos";
+    const AUTH_KEY = "menuAuth";
+    const DATA_LIBERACAO = new Date("2026-09-06T00:00:00").getTime();
+
+    function acessoLiberado() {
+        if (Date.now() >= DATA_LIBERACAO) return true;
+        return sessionStorage.getItem(AUTH_KEY) === "ok";
+    }
+
+    function pedirSenha() {
+        for (let tentativas = 0; tentativas < 3; tentativas++) {
+            const digitada = prompt("Menu ainda não liberado. Senha de acesso:");
+            if (digitada === null) break;
+            if (digitada === SENHA_MENU) {
+                sessionStorage.setItem(AUTH_KEY, "ok");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    if (!acessoLiberado() && !pedirSenha()) {
+        document.write('<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#5C3A45;text-align:center;padding:2rem;">Este menu ainda não está disponível.</div>');
+        document.close();
+        throw new Error("Acesso bloqueado até a data de liberação.");
+    }
+</script>
+
 <div class="card">
 
     <div class="badge-15"><span>15</span></div>
