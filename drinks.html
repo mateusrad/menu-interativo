@@ -737,10 +737,19 @@
     };
 
     window.abrirPedido = function(nomeDrink) {
+        const drinkInfo = infoDrinks[nomeDrink];
+
+        // Confirmação extra pra evitar que uma criança peça bebida alcoólica
+        // sem querer — não é controle de idade de verdade, só um freio a mais
+        // antes de abrir o pedido.
+        if (drinkInfo && drinkInfo.alcool) {
+            const confirmado = confirm("🔞 Este drink contém álcool.\n\nConfirme que este pedido é para um adulto.");
+            if (!confirmado) return;
+        }
+
         drinkAtual = nomeDrink;
         document.getElementById('nomeDrinkSelecionado').innerText = nomeDrink.toUpperCase();
 
-        const drinkInfo = infoDrinks[nomeDrink];
         if (drinkInfo) {
             document.getElementById('textoIngredientes').innerText = drinkInfo.ingredientes;
             const badgeAlcool = document.getElementById('modalAlcoolBadge');
