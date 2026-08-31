@@ -454,14 +454,14 @@
 <body>
 
 <div class="card">
-    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
+    <a href="index.html" class="btn-voltar" id="btnVoltar">⬅ Voltar</a>
 
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">Cocktails</p>
     <p class="header-sub">Toque para pedir</p>
     <p class="mesa-badge" id="mesaBadge"></p>
 
-    <a href="fila.html" class="btn-ver-fila">Acompanhar Fila de Espera ⏳</a>
+    <a href="fila.html" class="btn-ver-fila" id="btnVerFila">Acompanhar Fila de Espera ⏳</a>
 
     <h3 class="section-title">Drinks Sem Álcool (Teens)</h3>
     <div class="item-list">
@@ -585,6 +585,11 @@
         const badge = document.getElementById('mesaBadge');
         badge.textContent = `🪑 Mesa ${mesaAtual}`;
         badge.style.display = 'inline-block';
+
+        // Repassa a mesa pros links de navegação, senão o destino perde a
+        // referência e o próximo pedido feito por essa mesa fica sem número.
+        document.getElementById('btnVoltar').href = `index.html?mesa=${encodeURIComponent(mesaAtual)}`;
+        document.getElementById('btnVerFila').href = `fila.html?mesa=${encodeURIComponent(mesaAtual)}`;
     }
 
     const infoDrinks = {

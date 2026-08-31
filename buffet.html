@@ -185,7 +185,7 @@
 <body>
 
 <div class="card">
-    <a href="index.html" class="btn-voltar">⬅ Voltar</a>
+    <a href="index.html" class="btn-voltar" id="btnVoltar">⬅ Voltar</a>
 
     <div class="badge-15"><span>15</span></div>
     <p class="header-name">Cardápio</p>
@@ -219,6 +219,14 @@
     <img src="img/logo_mateus.png" alt="Logo Mateus Rosa Developer" class="dev-logo" />
     <span>Code & Design por <span class="dev-name">Mateus Rosa</span></span>
 </a>
+
+<script>
+    // Preserva a mesa (vinda do QR) ao voltar pro menu principal.
+    const mesaAtual = new URLSearchParams(window.location.search).get('mesa');
+    if (mesaAtual) {
+        document.getElementById('btnVoltar').href = `index.html?mesa=${encodeURIComponent(mesaAtual)}`;
+    }
+</script>
 
 </body>
 </html>

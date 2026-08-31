@@ -33,7 +33,7 @@
         .badge-alcool { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.1rem; font-family: 'Montserrat', sans-serif; }
         .badge-com { background: #ff4444; color: #fff; border: 1px solid #ffcccc; }
         .badge-sem { background: #00c851; color: #fff; border: 1px solid #ccffcc; }
-        .badge-mesa { align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; background: #A8506E; color: #fff; }
+        .badge-mesa { display: block; width: 100%; text-align: center; padding: 0.6rem; border-radius: 10px; font-size: 22px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; background: #C9A876; color: #2a1f10; box-shadow: 0 0 16px rgba(201, 168, 118, 0.7); border: 2px solid #F7DEE5; }
 
         .btn-acao { width: 100%; padding: 0.75rem; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s ease; }
         .btn-iniciar { background: #C9A876; color: #2a1f10; box-shadow: 0 0 10px rgba(201, 168, 118, 0.5); }
@@ -146,6 +146,22 @@
     const database = getDatabase(app);
     const pedidosRef = ref(database, 'pedidos');
 
+    // Mantém a tela ligada enquanto o painel do barman estiver aberto (evita
+    // o celular/tablet apagar a tela por inatividade durante o serviço).
+    let wakeLock = null;
+    async function pedirWakeLock() {
+        if (!('wakeLock' in navigator)) return;
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+        } catch (err) {
+            console.warn('Wake Lock indisponível:', err);
+        }
+    }
+    pedirWakeLock();
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') pedirWakeLock();
+    });
+
     // Evita XSS: nomes de convidados vêm de input livre e são inseridos via innerHTML
     function escapeHtml(str) {
         return String(str ?? '').replace(/[&<>"']/g, (c) => ({
@@ -214,8 +230,8 @@
                 qtdPendentes++;
                 card.innerHTML = `
                     <div class="info-pedido">
-                        <span class="nome-convidado">${nomeConvidado}</span>
                         ${mesaHtml}
+                        <span class="nome-convidado">${nomeConvidado}</span>
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
@@ -227,8 +243,8 @@
                 qtdFazendo++;
                 card.innerHTML = `
                     <div class="info-pedido">
-                        <span class="nome-convidado">${nomeConvidado}</span>
                         ${mesaHtml}
+                        <span class="nome-convidado">${nomeConvidado}</span>
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pedido às ${horaFormatada}</span>
@@ -240,8 +256,8 @@
                 qtdProntos++;
                 card.innerHTML = `
                     <div class="info-pedido">
-                        <span class="nome-convidado">${nomeConvidado}</span>
                         ${mesaHtml}
+                        <span class="nome-convidado">${nomeConvidado}</span>
                         <span class="nome-drink">${nomeExibido}</span>
                         ${badgeHtml}
                         <span class="horario">Pronto às ${horaFormatada}</span>

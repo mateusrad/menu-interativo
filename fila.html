@@ -109,7 +109,7 @@
 <body>
 
 <div class="top-navigation">
-    <a href="drinks.html" class="btn-voltar">⬅ Voltar</a>
+    <a href="drinks.html" class="btn-voltar" id="btnVoltar">⬅ Voltar</a>
 </div>
 
 <div class="logo-header">
@@ -155,6 +155,12 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // Preserva a mesa (vinda do QR) ao voltar pro cardápio de drinks.
+    const mesaAtual = new URLSearchParams(window.location.search).get('mesa');
+    if (mesaAtual) {
+        document.getElementById('btnVoltar').href = `drinks.html?mesa=${encodeURIComponent(mesaAtual)}`;
+    }
 
     const firebaseConfig = {
         apiKey: "AIzaSyAsCh0k2Kx6jiS1R3mJtAvhMaIY00up-2E",
