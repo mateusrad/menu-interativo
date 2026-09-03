@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório do Bar — 15 Anos Bárbara</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0f0407; color: #fff; padding: 1.5rem; }
+        .container { width: 100%; max-width: 900px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #A8506E; padding-bottom: 1rem; }
+        header h1 { font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; color: #F7DEE5; }
+        header p { font-size: 11px; color: #C9A876; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        .live-bar { text-align: center; font-size: 10.5px; color: #8c606d; margin-bottom: 1.5rem; font-family: 'Lora', serif; font-style: italic; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: #1a080e; border-radius: 16px; padding: 1.2rem; border: 1px solid rgba(168, 80, 110, 0.25); text-align: center; }
+        .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C9A876; margin-bottom: 0.6rem; }
+        .stat-value { font-size: 20px; font-weight: 800; color: #F7DEE5; line-height: 1.3; word-break: break-word; }
+        .stat-sub { font-size: 10.5px; color: #8c606d; margin-top: 0.35rem; font-family: 'Lora', serif; font-style: italic; }
+
+        .secao { background: #1a080e; border-radius: 20px; padding: 1.2rem; border: 1px solid rgba(168, 80, 110, 0.2); margin-bottom: 1.5rem; }
+        .secao h2 { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #C9A876; padding-bottom: 0.6rem; margin-bottom: 0.8rem; border-bottom: 1px solid rgba(168, 80, 110, 0.3); }
+
+        .ranking-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(168, 80, 110, 0.12); }
+        .ranking-item:last-child { border-bottom: none; }
+        .ranking-pos { font-size: 12px; font-weight: 800; color: #A8506E; width: 1.8rem; flex-shrink: 0; }
+        .ranking-nome { flex: 1; font-size: 13px; font-weight: 600; color: #fff; }
+        .ranking-qtd { font-size: 12px; font-weight: 800; color: #C9A876; }
+
+        .barra-hora { display: flex; align-items: center; gap: 0.7rem; padding: 0.4rem 0; }
+        .barra-hora-label { width: 3.2rem; flex-shrink: 0; font-size: 11px; color: #C9A876; font-weight: 700; }
+        .barra-hora-track { flex: 1; height: 16px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; }
+        .barra-hora-fill { height: 100%; background: linear-gradient(90deg, #A8506E, #C9A876); border-radius: 999px; }
+        .barra-hora-qtd { width: 2rem; text-align: right; font-size: 11px; color: #fff; font-weight: 700; }
+
+        .sem-dados { font-family: 'Lora', serif; text-align: center; color: #8c606d; font-size: 12px; padding: 1.5rem 0; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Relatório do Bar</h1>
+        <p>Drinks · 15 Anos da Bárbara</p>
+    </header>
+
+    <p class="live-bar">Atualiza sozinho conforme os pedidos entram · última leitura às <span id="horaUpdate">--:--</span></p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total de Drinks</div>
+            <div class="stat-value" id="statTotal">--</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Drink Mais Pedido</div>
+            <div class="stat-value" id="statTopDrink">--</div>
+            <div class="stat-sub" id="statTopDrinkQtd"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Quem Mais Pediu</div>
+            <div class="stat-value" id="statTopConvidado">--</div>
+            <div class="stat-sub" id="statTopConvidadoQtd"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Tempo Médio de Fila</div>
+            <div class="stat-value" id="statTempoFila">--</div>
+            <div class="stat-sub" id="statTempoFilaSub"></div>
+        </div>
+    </div>
+
+    <div class="secao">
+        <h2>📊 Pico de Pedidos por Horário</h2>
+        <div id="listaHoras"><div class="sem-dados">Sem pedidos registrados ainda.</div></div>
+    </div>
+
+    <div class="secao">
+        <h2>🍹 Ranking de Drinks</h2>
+        <div id="listaDrinks"><div class="sem-dados">Sem pedidos registrados ainda.</div></div>
+    </div>
+
+    <div class="secao">
+        <h2>🙋 Ranking de Convidados</h2>
+        <div id="listaConvidados"><div class="sem-dados">Sem pedidos registrados ainda.</div></div>
+    </div>
+</div>
+
+<script type="module">
+    // --- Gate de senha (proteção simples, não é segurança real: qualquer um com acesso
+    // ao código-fonte vê a senha. A proteção de verdade está nas regras do Firebase. ---
+    const SENHA_RELATORIO = "relatorio26";
+    const AUTH_KEY = "relatorioAuth";
+
+    function acessoLiberado() {
+        return sessionStorage.getItem(AUTH_KEY) === "ok";
+    }
+
+    function pedirSenha() {
+        for (let tentativas = 0; tentativas < 3; tentativas++) {
+            const digitada = prompt("Senha do relatório do bar:");
+            if (digitada === null) break; // cancelou
+            if (digitada === SENHA_RELATORIO) {
+                sessionStorage.setItem(AUTH_KEY, "ok");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    if (!acessoLiberado() && !pedirSenha()) {
+        document.body.innerHTML = `
+            <div class="container">
+                <header>
+                    <h1>Acesso Negado</h1>
+                    <p>Senha incorreta ou não informada</p>
+                </header>
+            </div>`;
+        throw new Error("Acesso não autorizado ao relatório do bar.");
+    }
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAsCh0k2Kx6jiS1R3mJtAvhMaIY00up-2E",
+        authDomain: "menu-interativo-faaec.firebaseapp.com",
+        databaseURL: "https://menu-interativo-faaec-default-rtdb.firebaseio.com",
+        projectId: "menu-interativo-faaec",
+        storageBucket: "menu-interativo-faaec.firebasestorage.app",
+        messagingSenderId: "1046837961375",
+        appId: "1:1046837961375:web:430ec81a42e46a0ccb38aa"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Evita XSS: nomes de convidados vêm de input livre e são inseridos via innerHTML
+    function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+    }
+
+    function formatarDuracao(minutos) {
+        if (minutos < 1) return `${Math.round(minutos * 60)}s`;
+        const inteiro = Math.floor(minutos);
+        const segundosRestantes = Math.round((minutos - inteiro) * 60);
+        return segundosRestantes > 0 ? `${inteiro}min ${segundosRestantes}s` : `${inteiro}min`;
+    }
+
+    onValue(ref(database, 'pedidos'), (snapshot) => {
+        document.getElementById('horaUpdate').textContent =
+            new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        const dados = snapshot.val() || {};
+        const pedidos = Object.values(dados);
+
+        document.getElementById('statTotal').textContent = pedidos.length;
+
+        // Ranking de drinks mais pedidos
+        const contagemDrinks = {};
+        pedidos.forEach((p) => {
+            if (!p.drink) return;
+            contagemDrinks[p.drink] = (contagemDrinks[p.drink] || 0) + 1;
+        });
+        const rankingDrinks = Object.entries(contagemDrinks).sort((a, b) => b[1] - a[1]);
+
+        if (rankingDrinks.length) {
+            document.getElementById('statTopDrink').textContent = rankingDrinks[0][0];
+            document.getElementById('statTopDrinkQtd').textContent = `${rankingDrinks[0][1]} pedido${rankingDrinks[0][1] > 1 ? 's' : ''}`;
+            document.getElementById('listaDrinks').innerHTML = rankingDrinks.map(([nome, qtd], i) => `
+                <div class="ranking-item">
+                    <span class="ranking-pos">${i + 1}º</span>
+                    <span class="ranking-nome">${escapeHtml(nome)}</span>
+                    <span class="ranking-qtd">${qtd}</span>
+                </div>
+            `).join('');
+        }
+
+        // Ranking de convidados que mais pediram (nome normalizado pra agrupar
+        // variações de maiúscula/espaço, mas exibindo como foi digitado)
+        const contagemConvidados = {};
+        pedidos.forEach((p) => {
+            if (!p.convidado) return;
+            const chave = p.convidado.trim().toLowerCase();
+            if (!contagemConvidados[chave]) {
+                contagemConvidados[chave] = { nome: p.convidado.trim(), qtd: 0 };
+            }
+            contagemConvidados[chave].qtd++;
+        });
+        const rankingConvidados = Object.values(contagemConvidados).sort((a, b) => b.qtd - a.qtd);
+
+        if (rankingConvidados.length) {
+            document.getElementById('statTopConvidado').textContent = rankingConvidados[0].nome;
+            document.getElementById('statTopConvidadoQtd').textContent = `${rankingConvidados[0].qtd} pedido${rankingConvidados[0].qtd > 1 ? 's' : ''}`;
+            document.getElementById('listaConvidados').innerHTML = rankingConvidados.map((c, i) => `
+                <div class="ranking-item">
+                    <span class="ranking-pos">${i + 1}º</span>
+                    <span class="ranking-nome">${escapeHtml(c.nome)}</span>
+                    <span class="ranking-qtd">${c.qtd}</span>
+                </div>
+            `).join('');
+        }
+
+        // Tempo médio de fila: da criação do pedido até ele ficar pronto.
+        // Só existe pra pedidos feitos depois do carimbo de horaPronto entrar em uso.
+        const temposFila = pedidos
+            .filter((p) => p.dataHora && p.horaPronto && p.horaPronto > p.dataHora)
+            .map((p) => (p.horaPronto - p.dataHora) / 60000);
+
+        if (temposFila.length) {
+            const media = temposFila.reduce((a, b) => a + b, 0) / temposFila.length;
+            document.getElementById('statTempoFila').textContent = formatarDuracao(media);
+            document.getElementById('statTempoFilaSub').textContent =
+                `com base em ${temposFila.length} pedido${temposFila.length > 1 ? 's' : ''}`;
+        } else {
+            document.getElementById('statTempoFila').textContent = '—';
+            document.getElementById('statTempoFilaSub').textContent = 'sem dados suficientes ainda';
+        }
+
+        // Pico de pedidos por horário (hora local do aparelho de quem pediu)
+        const contagemPorHora = {};
+        pedidos.forEach((p) => {
+            if (!p.dataHora) return;
+            const hora = new Date(p.dataHora).getHours();
+            const chave = String(hora).padStart(2, '0') + 'h';
+            contagemPorHora[chave] = (contagemPorHora[chave] || 0) + 1;
+        });
+        const horasOrdenadas = Object.entries(contagemPorHora).sort((a, b) => a[0].localeCompare(b[0]));
+
+        if (horasOrdenadas.length) {
+            const maxQtd = Math.max(...horasOrdenadas.map(([, qtd]) => qtd));
+            document.getElementById('listaHoras').innerHTML = horasOrdenadas.map(([hora, qtd]) => `
+                <div class="barra-hora">
+                    <span class="barra-hora-label">${hora}</span>
+                    <div class="barra-hora-track"><div class="barra-hora-fill" style="width: ${(qtd / maxQtd) * 100}%;"></div></div>
+                    <span class="barra-hora-qtd">${qtd}</span>
+                </div>
+            `).join('');
+        }
+    });
+</script>
+
+</body>
+</html>

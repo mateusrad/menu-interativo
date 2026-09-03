@@ -133,7 +133,7 @@
     }
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAsCh0k2Kx6jiS1R3mJtAvhMaIY00up-2E",
@@ -309,6 +309,14 @@
         toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
+    // Carimbo de tempo por status, usado pelo relatório do bar pra calcular o
+    // tempo médio de fila (dataHora até horaPronto).
+    const camposHoraPorStatus = {
+        fazendo: 'horaFazendo',
+        pronto: 'horaPronto',
+        entregue: 'horaEntregue'
+    };
+
     window.mudarStatus = function(idPedido, novoStatus) {
         const pedidoEspecificoRef = ref(database, `pedidos/${idPedido}`);
         const labelsAcao = {
@@ -318,7 +326,13 @@
         };
         const labelAcao = labelsAcao[novoStatus] || 'atualizado';
 
-        update(pedidoEspecificoRef, { status: novoStatus })
+        const dadosAtualizacao = { status: novoStatus };
+        const campoHora = camposHoraPorStatus[novoStatus];
+        if (campoHora) {
+            dadosAtualizacao[campoHora] = serverTimestamp();
+        }
+
+        update(pedidoEspecificoRef, dadosAtualizacao)
             .then(() => mostrarToast('Status Atualizado', `Pedido ${labelAcao} com sucesso.`))
             .catch((error) => {
                 console.error("Erro ao atualizar status:", error);
