@@ -109,6 +109,26 @@
             margin-bottom: 1rem;
         }
 
+        /* ── Cronômetro do Bar (mesmas janelas do index.html) ── */
+        #bar-timer-drinks {
+            width: 100%;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .timer-waiting { background: #FBEAEF; color: #A8506E; border: 1px solid rgba(168, 80, 110, 0.25); }
+        .timer-open { background: #e6f4ea; color: #1e8e3e; border: 1px solid #ceead6; }
+        .timer-closed { background: #fce8e6; color: #d93025; border: 1px solid #fad2cf; }
+
+        .menu-item-btn.bar-fechado {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
         .btn-ver-fila {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -461,6 +481,8 @@
     <p class="header-sub">Toque para pedir</p>
     <p class="mesa-badge" id="mesaBadge"></p>
 
+    <div id="bar-timer-drinks" class="timer-waiting">⏳ Carregando status do bar...</div>
+
     <a href="fila.html" class="btn-ver-fila" id="btnVerFila">Acompanhar Fila de Espera ⏳</a>
 
     <h3 class="section-title">Drinks Sem Álcool (Teens)</h3>
@@ -591,6 +613,57 @@
         document.getElementById('btnVoltar').href = `index.html?mesa=${encodeURIComponent(mesaAtual)}`;
         document.getElementById('btnVerFila').href = `fila.html?mesa=${encodeURIComponent(mesaAtual)}`;
     }
+
+    // Cronômetro do bar (mesmas janelas do index.html): trava o pedido aqui
+    // também, senão um convidado que ficou com esta página aberta consegue
+    // pedir mesmo fora do horário, já que o bloqueio do index.html só afeta
+    // o link de entrada.
+    const janelasBar = [
+        { abre: new Date("2026-09-06T19:20:00").getTime(), fecha: new Date("2026-09-06T20:20:00").getTime() },
+        { abre: new Date("2026-09-06T21:30:00").getTime(), fecha: new Date("2026-09-07T00:30:00").getTime() }
+    ];
+    let barAberto = false;
+
+    function formatarDistanciaBar(distance) {
+        const horas = Math.floor(distance / (1000 * 60 * 60));
+        const minutos = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distance % (1000 * 60)) / 1000);
+        return `${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    function updateBarTimerDrinks() {
+        const now = new Date().getTime();
+        const timerEl = document.getElementById('bar-timer-drinks');
+        const botoesMenu = document.querySelectorAll('.menu-item-btn');
+
+        const janelaAberta = janelasBar.find((j) => now >= j.abre && now < j.fecha);
+
+        if (janelaAberta) {
+            barAberto = true;
+            const distance = janelaAberta.fecha - now;
+            timerEl.className = 'timer-open';
+            timerEl.innerHTML = `🟢 BAR ABERTO! Encerra em: ${formatarDistanciaBar(distance)}`;
+            botoesMenu.forEach((btn) => btn.classList.remove('bar-fechado'));
+            return;
+        }
+
+        barAberto = false;
+        botoesMenu.forEach((btn) => btn.classList.add('bar-fechado'));
+
+        const proximaJanela = janelasBar.find((j) => now < j.abre);
+        if (proximaJanela) {
+            const distance = proximaJanela.abre - now;
+            timerEl.className = 'timer-waiting';
+            timerEl.innerHTML = `⏳ Bar fechado. Abre em: ${formatarDistanciaBar(distance)}`;
+            return;
+        }
+
+        timerEl.className = 'timer-closed';
+        timerEl.innerHTML = `🔴 O Bar de Drinks está encerrado.`;
+    }
+
+    setInterval(updateBarTimerDrinks, 1000);
+    updateBarTimerDrinks();
 
     const infoDrinks = {
         "Drink da Aniversariante (Sem Álcool)": {
@@ -737,6 +810,11 @@
     };
 
     window.abrirPedido = function(nomeDrink) {
+        if (!barAberto) {
+            mostrarToast('Bar Fechado', 'O bar de drinks só recebe pedidos dentro do horário de funcionamento.', true);
+            return;
+        }
+
         const drinkInfo = infoDrinks[nomeDrink];
 
         // Confirmação extra pra evitar que uma criança peça bebida alcoólica

@@ -371,18 +371,16 @@
             timerEl.className = "timer-waiting";
             timerEl.innerHTML = `⏳ O Bar de Drinks abre em: ${formatarDistancia(distance)}`;
 
-            // COMENTADO PARA FASE DE DESENVOLVIMENTO:
-            // btnDrinks.style.pointerEvents = "none";
-            // btnDrinks.style.opacity = "0.6";
+            btnDrinks.style.pointerEvents = "none";
+            btnDrinks.style.opacity = "0.6";
             return;
         }
 
         timerEl.className = "timer-closed";
         timerEl.innerHTML = `🔴 O Bar de Drinks está encerrado.`;
 
-        // COMENTADO PARA FASE DE DESENVOLVIMENTO:
-        // btnDrinks.style.pointerEvents = "none";
-        // btnDrinks.style.opacity = "0.6";
+        btnDrinks.style.pointerEvents = "none";
+        btnDrinks.style.opacity = "0.6";
     }
 
     setInterval(updateBarTimer, 1000);
