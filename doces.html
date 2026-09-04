@@ -60,6 +60,28 @@
 
         .item-list { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
 
+        .disponibilidade {
+            width: 100%;
+            background: #FBEAEF;
+            border: 1px solid rgba(168, 80, 110, 0.2);
+            border-radius: 16px;
+            padding: 0.6rem 0.9rem;
+            margin: -0.2rem 0 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.15rem;
+            text-align: center;
+        }
+        .disp-horario {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #A8506E;
+        }
+
         .menu-item { width: 100%; padding: 1rem 1.4rem; border-radius: 18px; background: #fff; color: #5C3A45; font-family: 'Lora', serif; font-size: 13px; font-weight: 400; letter-spacing: 0.01em; box-shadow: 0 2px 8px rgba(168, 80, 110, 0.07); border: 1.5px solid rgba(168, 80, 110, 0.2); line-height: 1.4; }
 
         /* ── Assinatura ── */
@@ -100,8 +122,11 @@
     <p class="header-sub">Mesa de Doces</p>
 
     <h3 class="section-title">O Bolo Real</h3>
+    <div class="disponibilidade">
+        <span class="disp-horario">🎁 Não será servido na mesa</span>
+    </div>
     <div class="item-list">
-        <div class="menu-item">Recheio de Chocolate, Morango e Amendoim</div>
+        <div class="menu-item">Recheio de Chocolate e Amendoim. Entregue como lembrancinha, em embalagem individual.</div>
     </div>
 
     <h3 class="section-title">Doces Finos</h3>
